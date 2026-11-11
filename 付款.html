@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>YOUR BRAND NAME – 付款</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dat_phong.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="icon" type="image/x-icon" href="logoduan.png">
+    <link rel="stylesheet" href="thanh_toan.css">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="mobile.js" defer></script>
+</head>
+<body>
+<div class="hd" id="hd" role="banner">
+    <a href="../trang_chu/home_bantrung.html" class="hd-brand">
+        <img src="logoduan.png" alt="3HILLS" style="width:50px;height:50px;object-fit:cover;border-radius:18px;box-shadow:0 6px 16px rgba(0,0,0,.15);flex-shrink:0" href="../trang_chu/home_bantrung.html">
+        YOUR BRAND<br />NAME
+    </a>
+  <nav class="hd-nav hd-glass" id="hd-nav" aria-label="主菜单">
+    <span class="hd-pill" id="hd-pill"></span>
+    <a href="../trang_chu/home_bantrung.html">故事</a>
+    <a href="../hang_phong/客房介绍.html">房型</a>
+    <a href="../photo_walk/摄影漫步.html">摄影漫步</a>
+  </nav>
+  <div class="hd-actions">
+    <div class="hd-lang hd-glass">
+      <a href="thanh_toan.html">Tiếng Việt</a>
+      <a href="付款.html" aria-current="true">中文</a>
+    </div>
+  </div>
+</div>
+
+<section class="hc">
+  <div class="hc-bg"></div>
+  <div class="hc-blob a"><i></i></div><div class="hc-blob b"><i></i></div><div class="hc-blob c"><i></i></div>
+  <h2 class="hc-sr">YOUR BRAND NAME | 付款</h2>
+  <div class="hc-stage" aria-hidden="true">
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+  </div>
+
+  <div class="bk-wrap">
+    <main class="bk">
+      <header>
+        <div><h1>付款</h1><p>选择合适的支付方式、政策及优惠以完成预订。</p></div>
+        <div class="note bk-glass">🔒 支付信息已加密保护</div>
+      </header>
+
+      <div id="bk-form">
+        <section class="sum bk-glass" id="booked" style="margin-top:22px;margin-bottom:0">
+          <div>
+              <h3>您选择的客房</h3>
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700" id="b-room"></div>
+            <div class="meta" style="margin-top:8px">
+              <span>入住日期: <b id="b-in"></b></span>•
+              <span>退房日期 <b id="b-out"></b></span>•
+              <span>入住人数：<b id="b-g"></b></span>
+            </div>
+            <div class="meta" style="margin-top:6px">
+              <span>预订人： <b id="b-name"></b></span>•
+              <span>附加服务： <b id="b-svc"></b></span>
+            </div>
+          </div>
+          <div class="total"><small id="b-rate"></small><span class="amt" id="b-sub"></span></div>
+        </section>
+
+        <div class="l sec">支付方式</div>
+        <div class="opts auto" id="methods">
+          <label class="opt"><input type="radio" name="method" value="momo" checked>MoMo 电子钱包</label>
+          <label class="opt"><input type="radio" name="method" value="card">信用卡或借记卡</label>
+          <label class="opt"><input type="radio" name="method" value="bank">银行账户 / QR 码支付</label>
+          <label class="opt"><input type="radio" name="method" value="alipay">支付宝 / 微信支付</label>
+          <label class="opt"><input type="radio" name="method" value="cash">入住时到店当面支付</label>
+        </div>
+        <div class="hint" id="m-hint"></div>
+        <div class="reveal bk-glass" id="card-box">
+          <div class="grid g4" style="margin-top:0">
+            <div style="grid-column:span 2"><label class="l" for="cn">卡号</label><input id="cn" inputmode="numeric" placeholder="1234 5678 9012 3456"></div>
+            <div><label class="l" for="ce">有效期</label><input id="ce" inputmode="numeric" placeholder="MM/YY"></div>
+            <div><label class="l" for="cv"> CVV码 / 后三码</label><input id="cv" type="password" inputmode="numeric" maxlength="4" placeholder="123"></div>
+          </div>
+        </div>
+
+        <div class="l sec">支付政策</div>
+        <div class="opts two" id="policies">
+          <label class="opt"><input type="checkbox" class="pol" value="deposit" checked>支付押金 (30%)</label>
+          <label class="opt"><input type="checkbox" class="pol" value="prepaid">全额预付 (100%)</label>
+          <label class="opt"><input type="checkbox" class="pol" value="postpaid">后付款 / 到店支付</label>
+        </div>
+
+        <div class="l sec">优惠与发票</div>
+        <div class="opts two">
+          <label class="opt"><input type="checkbox" id="use-coupon">使用优惠码及折扣</label>
+          <label class="opt"><input type="checkbox" id="use-inv">开具电子发票 (e-Invoice)</label>
+        </div>
+        <div class="reveal bk-glass" id="coupon-box">
+          <label class="l" for="coupon">输入优惠码</label>
+          <div class="code-row">
+            <div><input id="coupon" placeholder="例如：HALONG10" autocomplete="off"><div class="err" id="c-err"></div><div class="okmsg" id="c-ok"></div></div>
+            <button type="button" id="c-apply">应用</button>
+          </div>
+        </div>
+        <div class="reveal bk-glass" id="inv-box">
+          <div class="grid g3" style="margin-top:0">
+            <div><label class="l" for="iv-co">公司名称 / 个人姓名</label><input id="iv-co"></div>
+            <div><label class="l" for="iv-tax">纳税人识别号</label><input id="iv-tax" inputmode="numeric"></div>
+            <div><label class="l" for="iv-mail">发票接收邮件</label><input id="iv-mail" type="email"></div>
+          </div>
+        </div>
+
+        <section class="sum bk-glass">
+          <div>
+            <h3>支付汇总</h3>
+            <div class="meta">
+              <span><b id="s-room"></b> • <b id="s-n"></b></span>•
+              <span>小计: <b id="s-sub"></b></span>•
+              <span>优惠减免: <b id="s-dis">¥0.00</b></span>•
+              <span>订单总额: <b id="s-tot"></b></span>
+            </div>
+          </div>
+          <div class="cta">
+            <div class="total"><small id="due-lbl">需立即支付:</small><span class="amt" id="s-due">¥0.00</span></div>
+            <button id="pay" type="button">确认支付</button>
+          </div>
+        </section>
+        <div class="err" id="err" style="text-align:right"></div>
+      </div>
+
+      <section class="ok bk-glass" id="ok">
+        <div class="tick">✓</div>
+        <h2>感谢您！</h2>
+        <p style="color:var(--muted)">订单 <b id="ok-code" style="color:var(--ink)"></b> 您的信息已登记。确认通知将通过您的手机号、Zalo 或微信发送。</p>
+      </section>
+    </main>
+
+    <ol class="bk-steps" id="bk-steps" aria-label="预订进度">
+      <li class="bk-step is-done" data-step="1"><span class="bk-dot"><b>✓</b></span></li>
+      <li class="bk-line is-full" aria-hidden="true"><i></i></li>
+      <li class="bk-step is-active" aria-current="step" data-step="2"><span class="bk-dot"><b>2</b></span></li>
+      <li class="bk-line" aria-hidden="true"><i></i></li>
+      <li class="bk-step" data-step="3"><span class="bk-dot"><b>3</b></span></li>
+    </ol>
+  </div>
+</section>
+
+<script>
+/* 首页滚动文字 + 页头：沿用预订页逻辑 */
+(function(){
+  var TEXT='YOUR BRAND NAME',SPEED=[64,52,78,58,70],OFF=[0,.3,.55,.8,.15];
+  function item(){var s=document.createElement('span');s.className='hc-item';s.innerHTML='<span class="hc-t"></span><i class="hc-dot"></i>';s.firstChild.textContent=TEXT;return s}
+  var el=document.querySelector('.hc'),rows=[].slice.call(el.querySelectorAll('.hc-row'));
+  function build(){rows.forEach(function(row,i){var t=row.querySelector('.hc-track');t.innerHTML='';var g=document.createElement('div');g.className='hc-group';g.appendChild(item());t.appendChild(g);
+    var w=g.getBoundingClientRect().width||1,n=Math.max(1,Math.ceil(el.clientWidth/w));for(var k=1;k<n;k++)g.appendChild(item());
+    var gw=g.getBoundingClientRect().width,c=g.cloneNode(true);c.setAttribute('aria-hidden','true');t.appendChild(c);
+    var d=gw/SPEED[i];t.style.animationDuration=d+'s';t.style.animationDelay=(-d*OFF[i])+'s'})}
+  var tm;window.addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(build,200)});build();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(build);
+  el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--hc-mx',((e.clientX-r.left)/r.width-.5).toFixed(3));el.style.setProperty('--hc-my',((e.clientY-r.top)/r.height-.5).toFixed(3))},{passive:true});
+  var nav=document.getElementById('hd-nav'),pill=document.getElementById('hd-pill'),hd=document.getElementById('hd');
+  function move(a){pill.style.width=a.offsetWidth+'px';pill.style.transform='translateX('+(a.offsetLeft-6)+'px)';pill.classList.add('on')}
+  [].forEach.call(nav.querySelectorAll('a'),function(a){a.addEventListener('mouseenter',function(){move(a)})});
+  nav.addEventListener('mouseleave',function(){pill.classList.remove('on')});
+  window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>30)},{passive:true});
+})();
+
+/* 付款 */
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return '¥'+(Math.round(n*100)/100).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2})}; /* 后台金额单位：人民币（元） */
+  var o=null;
+  try{var q=new URLSearchParams(location.search).get('d');if(q)o=JSON.parse(q)}catch(e){}
+  if(!o){try{o=JSON.parse(sessionStorage.getItem('booking')||'null')}catch(e){}}
+  if(!o){
+    o={room:'（暂无预订数据）',nights:0,rate:0,svc:0};
+    var w=document.createElement('div');w.className='err';w.style.cssText='font-size:14px;margin-top:14px';
+    w.innerHTML='尚未收到预订页面的数据。<a href="预订房间.html">返回预订</a>，然后点击“下一步”。';
+    document.querySelector('.bk header').after(w);
+  }
+  var sub=o.rate*o.nights+o.svc,discount=0,code='HCB'+Date.now().toString().slice(-6);
+  var T=function(id,v){$(id).textContent=v};
+  T('b-room',o.room);T('b-in',o.cin||'—');T('b-out',o.cout||'—');T('b-g',o.guests||'—');
+  T('b-name',(o.name||'—')+(o.phone?' – '+o.phone:''));
+  T('b-svc',o.services&&o.services.length?o.services.join('、'):'无');
+  T('b-rate',fmt(o.rate)+'/晚 × '+o.nights+' 晚 + 附加服务');T('b-sub',fmt(o.rate*o.nights+o.svc));
+  $('s-room').textContent=o.room;$('s-n').textContent=o.nights+' 晚';$('s-sub').textContent=fmt(sub);
+
+  var HINTS={momo:'确认后扫码或打开 MoMo 应用完成支付。',card:'请在下方填写 Visa / Mastercard / JCB 银行卡信息。',bank:'转账或扫描银行二维码，转账备注填写订单号。',alipay:'面向国际游客：扫描支付宝 / 微信支付二维码。',cash:'入住时在前台当面支付。'};
+  var COUPONS={HALONG10:{pct:10,t:'减免 10%'},WELCOME30:{off:30,t:'立减 ¥30.00'},ALIPAY5:{pct:5,t:'减免 5%'}}; /* off 的单位：人民币元 */
+
+  var pols=[].slice.call(document.querySelectorAll('.pol'));
+  pols.forEach(function(c){c.addEventListener('change',function(){
+    if(c.checked)pols.forEach(function(x){if(x!==c)x.checked=false});else c.checked=true; /* 始终保留一项政策 */
+    calc()})});
+
+  function method(){return document.querySelector('input[name=method]:checked').value}
+  [].forEach.call(document.querySelectorAll('input[name=method]'),function(r){r.addEventListener('change',function(){
+    $('m-hint').textContent=HINTS[method()];$('card-box').classList.toggle('on',method()==='card');$('err').textContent=''})});
+  $('m-hint').textContent=HINTS.momo;
+
+  $('use-coupon').addEventListener('change',function(){
+    $('coupon-box').classList.toggle('on',this.checked);
+    if(this.checked)$('coupon').focus();
+    else{discount=0;$('coupon').value='';$('c-err').textContent='';$('c-ok').textContent='';calc()}
+  });
+  $('use-inv').addEventListener('change',function(){$('inv-box').classList.toggle('on',this.checked)});
+
+  function applyCoupon(){
+    var v=$('coupon').value.trim().toUpperCase(),c=COUPONS[v];
+    $('c-err').textContent='';$('c-ok').textContent='';
+    if(!v){$('c-err').textContent='请输入优惠码。';return}
+    if(!c){discount=0;$('c-err').textContent='优惠码无效或已过期。';calc();return}
+    discount=Math.min(sub,Math.round((c.pct?sub*c.pct/100:c.off)*100)/100);
+    $('c-ok').textContent='✓ 已使用：'+c.t;calc();
+  }
+  $('c-apply').onclick=applyCoupon;
+  $('coupon').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();applyCoupon()}});
+
+  var shown=0,raf,dueNow=0,polNow='deposit';
+  function animate(t){cancelAnimationFrame(raf);var f=shown,t0=performance.now(),el=$('s-due');
+    el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
+    (function s(n){var p=Math.min(1,(n-t0)/500),e=1-Math.pow(1-p,3);shown=f+(t-f)*e;el.textContent=fmt(shown);if(p<1)raf=requestAnimationFrame(s)})(t0)}
+  function calc(){
+    var total=sub-discount,pol=document.querySelector('.pol:checked').value;
+    var due=pol==='prepaid'?total:pol==='deposit'?total*.3:0;
+    if(method()==='cash'&&pol!=='postpaid'){/* 仍按所选政策计算 */}
+    $('s-dis').textContent=discount?'-'+fmt(discount):fmt(0);$('s-tot').textContent=fmt(total);
+    $('due-lbl').textContent=pol==='postpaid'?'入住/退房时支付：':'需立即支付：';
+    dueNow=pol==='postpaid'?0:due;polNow=pol;animate(dueNow);
+  }
+  calc();
+
+  $('pay').onclick=function(){
+    var err='';
+    if(method()==='card'&&($('cn').value.replace(/\s/g,'').length<13||$('ce').value.trim().length<4||$('cv').value.length<3))err='请完整填写银行卡信息。';
+    if($('use-coupon').checked&&$('coupon').value.trim()&&!discount)err='您尚未应用优惠码——请点击“应用”，或取消勾选优惠码。';
+    if($('use-inv').checked&&(!$('iv-co').value.trim()||!$('iv-tax').value.trim()||!$('iv-mail').value.trim()))err='请填写完整的电子发票信息。';
+    $('err').textContent=err;if(err)return;
+    var d=Object.assign({},o,{code:code,method:method(),discount:discount,coupon:$('coupon').value.trim().toUpperCase(),
+      total:sub-discount,due:Math.round(dueNow*100)/100,currency:'CNY',policy:polNow,
+      invoice:$('use-inv').checked?{co:$('iv-co').value,tax:$('iv-tax').value,mail:$('iv-mail').value}:null});
+    /* Cần trả ngay bằng QR -> sang trang 3; đơn được lưu ở trang đó */
+    if((method()==='bank'||method()==='momo'||method()==='alipay')&&dueNow>0){
+      try{sessionStorage.setItem('booking2',JSON.stringify(d))}catch(e){}
+      location.href='扫码支付.html?d='+encodeURIComponent(JSON.stringify(d));return;
+    }
+    /* Các trường hợp còn lại (trả sau / tiền mặt / thẻ): LƯU ĐƠN vào database rồi mới báo thành công */
+    var btn=$('pay');if(btn.disabled)return;btn.disabled=true;
+    fetch('/api/bookings/paid',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},d,{lang:'zh'}))})
+      .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})})
+      .then(function(){
+        $('bk-form').style.display='none';$('ok').classList.add('on');$('ok-code').textContent=code;
+        [].forEach.call(document.querySelectorAll('#bk-steps .bk-step'),function(li){li.classList.add('is-done');li.classList.remove('is-active');li.querySelector('b').textContent='\u2713'});
+        [].forEach.call(document.querySelectorAll('#bk-steps .bk-line'),function(l){l.classList.add('is-full')});
+        try{sessionStorage.removeItem('booking')}catch(e){}
+      })
+      .catch(function(e){btn.disabled=false;$('err').textContent='订单保存失败，请重试：'+e.message});
+  };
+})();
+</script>
+</body>
+</html>

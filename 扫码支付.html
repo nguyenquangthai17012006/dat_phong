@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>YOUR BRAND NAME – 扫码支付</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dat_phong.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="thanh_toan.css">
+    <link rel="stylesheet" href="thanh_toan_qr.css">
+    <link rel="icon" type="image/x-icon" href="logoduan.png">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="mobile.js" defer></script>
+</head>
+<body>
+<div class="hd" id="hd" role="banner">
+    <a href="../trang_chu/home_bantrung.html" class="hd-brand">
+        <img src="logoduan.png" alt="3HILLS" style="width:50px;height:50px;object-fit:cover;border-radius:18px;box-shadow:0 6px 16px rgba(0,0,0,.15);flex-shrink:0" href="../trang_chu/home_bantrung.html">
+        YOUR BRAND<br />NAME
+    </a>
+  <nav class="hd-nav hd-glass" id="hd-nav" aria-label="主菜单">
+      <span class="hd-pill" id="hd-pill"></span>
+      <a href="../trang_chu/home_bantrung.html">故事</a>
+      <a href="../hang_phong/客房介绍.html">房型</a>
+      <a href="../photo_walk/摄影漫步.html">摄影漫步</a>
+  </nav>
+  <div class="hd-actions">
+    <div class="hd-lang hd-glass">
+      <a href="thanh_toan_qr.html">Tiếng Việt</a>
+      <a href="扫码支付.html" aria-current="true">中文</a>
+    </div>
+  </div>
+</div>
+
+<section class="hc">
+  <div class="hc-bg"></div>
+  <div class="hc-blob a"><i></i></div><div class="hc-blob b"><i></i></div><div class="hc-blob c"><i></i></div>
+  <h2 class="hc-sr">YOUR BRAND NAME | 扫码支付</h2>
+  <div class="hc-stage" aria-hidden="true">
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+  </div>
+
+  <div class="bk-wrap">
+    <main class="bk">
+      <header>
+        <div><h1>扫码支付</h1><p>请打开银行App、MoMo、支付宝或微信扫描下方二维码进行支付。</p></div>
+        <div class="note bk-glass">⏱ 二维码有效时间为 5 分钟</div>
+      </header>
+
+      <div class="qr-grid">
+        <section class="box bk-glass qr-card">
+          <div class="opts two" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 18px">
+            <label class="opt"><input type="radio" name="qm" value="bank">银行账户</label>
+            <label class="opt"><input type="radio" name="qm" value="momo">MoMo 电子钱包</label>
+            <label class="opt"><input type="radio" name="qm" value="alipay">支付宝 / 微信</label>
+          </div>
+          <div class="qr-box" id="qr-box">
+            <img id="qr-img" alt="支付二维码">
+            <div class="qr-ph" id="qr-ph">暂无二维码图片<br><small id="qr-ph-s"></small></div>
+            <div class="qr-exp" id="qr-exp"><b>二维码已过期</b><button type="button" id="qr-renew">生成新二维码</button></div>
+          </div>
+          <div class="amt" id="q-amt" style="margin-top:14px"></div>
+          <div class="hint" style="margin:4px 0 0">转账附言: <b id="q-code" style="color:var(--ink)"></b></div>
+        </section>
+
+        <section class="box bk-glass">
+          <div class="l">剩余支付时间</div>
+          <div class="clock" id="clock">05:00</div>
+          <div class="bar"><i id="bar"></i></div>
+          <div class="status" id="status">⏳ 正在等待您付款…</div>
+          <ol class="how">
+              <li>打开银行App、MoMo、支付宝或微信。</li>
+              <li>扫描二维码并核对转账金额与附言。</li>
+              <li>完成支付 – 系统收到款项后将自动通知。</li>
+          </ol>
+          <button type="button" id="demo" style="margin-top:16px;width:100%">我已支付</button>
+        </section>
+      </div>
+
+      <section class="sum bk-glass" style="display:block">
+        <h3>银行账户信息（用于核对）</h3>
+        <div class="info">
+          <div><span>开户银行</span><b id="k-bank"></b></div>
+          <div><span>银行账号</span><b><em id="k-acc" style="font-style:normal"></em><button type="button" class="cp" data-copy="k-acc">复制</button></b></div>
+          <div><span>账户名称</span><b id="k-name"></b></div>
+          <div><span>应付金额</span><b id="k-amt"></b></div>
+          <div><span>转账附言</span><b><em id="k-code" style="font-style:normal"></em><button type="button" class="cp" data-copy="k-code">复制</button></b></div>
+          <div><span>支行网点</span><b id="k-br"></b></div>
+        </div>
+        <p class="hint" style="margin:14px 0 0">转账时请准确填写附言，以便系统自动确认订单。</p>
+      </section>
+
+      <section class="sum bk-glass" style="display:block;margin-top:22px">
+        <h3>客户与预订信息</h3>
+        <div class="info">
+          <div><span>入住客户</span><b id="i-name"></b></div>
+          <div><span>电话号码</span><b id="i-phone"></b></div>
+          <div><span>房型选择</span><b id="i-room"></b></div>
+          <div><span>入住日期</span><b id="i-in"></b></div>
+          <div><span>退房日期</span><b id="i-out"></b></div>
+          <div><span>晚数 / 人数</span><b id="i-n"></b></div>
+          <div><span>附加服务</span><b id="i-svc"></b></div>
+          <div><span>支付政策</span><b id="i-pol"></b></div>
+          <div><span>优惠码</span><b id="i-cp"></b></div>
+          <div><span>电子发票</span><b id="i-inv"></b></div>
+          <div><span>订单总额</span><b id="i-tot"></b></div>
+          <div><span>订单编号</span><b id="i-code"></b></div>
+        </div>
+      </section>
+    </main>
+
+    <ol class="bk-steps" id="bk-steps" aria-label="预订进度">
+      <li class="bk-step is-done" data-step="1"><span class="bk-dot"><b>✓</b></span></li>
+      <li class="bk-line is-full" aria-hidden="true"><i></i></li>
+      <li class="bk-step is-done" data-step="2"><span class="bk-dot"><b>✓</b></span></li>
+      <li class="bk-line is-full" aria-hidden="true"><i></i></li>
+      <li class="bk-step is-active" aria-current="step" data-step="3"><span class="bk-dot"><b>3</b></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 支付成功提示（放在 .bk 之外，避免玻璃层定位问题） -->
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-t">
+  <div class="pop-card">
+    <div class="tick">✓</div>
+    <h2 id="pop-t">支付成功！</h2>
+    <p>尊敬的 <b id="pop-name"></b>，我们已收到订单 <b id="pop-code"></b> 的款项 <b id="pop-amt"></b>。</p>
+    <p class="pop-s">预订确认信息将通过您的 电话 / Zalo / 微信 发送给您。</p>
+    <button type="button" id="pop-ok">完成</button>
+  </div>
+</div>
+
+<script>
+/* 首页滚动文字 + 页头：沿用预订页逻辑 */
+(function(){
+  var TEXT='YOUR BRAND NAME',SPEED=[64,52,78,58,70],OFF=[0,.3,.55,.8,.15];
+  function item(){var s=document.createElement('span');s.className='hc-item';s.innerHTML='<span class="hc-t"></span><i class="hc-dot"></i>';s.firstChild.textContent=TEXT;return s}
+  var el=document.querySelector('.hc'),rows=[].slice.call(el.querySelectorAll('.hc-row'));
+  function build(){rows.forEach(function(row,i){var t=row.querySelector('.hc-track');t.innerHTML='';var g=document.createElement('div');g.className='hc-group';g.appendChild(item());t.appendChild(g);
+    var w=g.getBoundingClientRect().width||1,n=Math.max(1,Math.ceil(el.clientWidth/w));for(var k=1;k<n;k++)g.appendChild(item());
+    var gw=g.getBoundingClientRect().width,c=g.cloneNode(true);c.setAttribute('aria-hidden','true');t.appendChild(c);
+    var d=gw/SPEED[i];t.style.animationDuration=d+'s';t.style.animationDelay=(-d*OFF[i])+'s'})}
+  var tm;window.addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(build,200)});build();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(build);
+  el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--hc-mx',((e.clientX-r.left)/r.width-.5).toFixed(3));el.style.setProperty('--hc-my',((e.clientY-r.top)/r.height-.5).toFixed(3))},{passive:true});
+  var nav=document.getElementById('hd-nav'),pill=document.getElementById('hd-pill'),hd=document.getElementById('hd');
+  function move(a){pill.style.width=a.offsetWidth+'px';pill.style.transform='translateX('+(a.offsetLeft-6)+'px)';pill.classList.add('on')}
+  [].forEach.call(nav.querySelectorAll('a'),function(a){a.addEventListener('mouseenter',function(){move(a)})});
+  nav.addEventListener('mouseleave',function(){pill.classList.remove('on')});
+  window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>30)},{passive:true});
+})();
+
+
+/* ===== 第3页：二维码 + 5分钟倒计时 ===== */
+(function(){
+  /* --- 配置：请替换为真实信息（cnyToVnd 为人民币兑越南盾汇率） --- */
+  var CFG={bankBin:'VCB',bankLabel:'越南外贸银行 Vietcombank (VCB)',bankBranch:'广宁省分行',cnyToVnd:3860,bankAcc:'0123456789',bankName:'TEN CHU TAI KHOAN',alipayQR:'qr_alipay.png',momoQR:'qr_momo.png',
+           minutes:5,demo:true,api:'',home:'/trang_chu/home.html'};
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return '¥'+(Math.round(n*100)/100).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2})}; /* 金额单位：人民币（元） */
+  var vnd=function(n){return Math.round(n*CFG.cnyToVnd).toLocaleString('vi-VN')+'₫'}; /* VietQR 只接受越南盾 */
+  var o=null;
+  try{var q=new URLSearchParams(location.search).get('d');if(q)o=JSON.parse(q)}catch(e){}
+  if(!o){try{o=JSON.parse(sessionStorage.getItem('booking2')||'null')}catch(e){}}
+  if(!o){location.replace('预订房间.html');return}
+  var POL={deposit:'支付押金 (30%)',prepaid:'全额预付 (100%)',postpaid:'后付款 / 到店支付'};
+  var T=function(id,v){$(id).textContent=v};
+  T('i-name',o.name||'—');T('i-phone',o.phone||'—');T('i-room',o.room);T('i-in',o.cin||'—');T('i-out',o.cout||'—');
+  T('i-n',o.nights+' 晚 / '+(o.guests||'—'));T('i-svc',o.services&&o.services.length?o.services.join('、'):'无');
+  T('i-pol',POL[o.policy]||'—');T('i-cp',o.coupon?o.coupon+' (-'+fmt(o.discount)+')':'无');
+  T('i-inv',o.invoice?o.invoice.co+' – 税号 '+o.invoice.tax:'无');T('i-tot',fmt(o.total));T('i-code',o.code);
+  T('q-amt',fmt(o.due));T('q-code',o.code);
+  T('k-bank',CFG.bankLabel);T('k-acc',CFG.bankAcc);T('k-name',CFG.bankName);T('k-amt',fmt(o.due)+'（约 '+vnd(o.due)+'，银行转账以越南盾计）');T('k-code',o.code);T('k-br',CFG.bankBranch);
+  [].forEach.call(document.querySelectorAll('.cp[data-copy]'),function(b){b.onclick=function(){
+    var t=$(b.dataset.copy).textContent,old=b.textContent;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){}).then(function(){b.textContent='已复制 ✓';setTimeout(function(){b.textContent=old},1500)})}});
+
+  /* --- 按支付方式显示二维码 --- */
+  var method=(o.method==='alipay'||o.method==='momo')?o.method:'bank';
+  var img=$('qr-img'),ph=$('qr-ph');
+  function showQR(){
+    document.querySelector('input[name=qm][value='+method+']').checked=true;
+    var url=method==='bank'
+      ?'https://img.vietqr.io/image/'+CFG.bankBin+'-'+CFG.bankAcc+'-compact2.png?amount='+Math.round(o.due*CFG.cnyToVnd)+'&addInfo='+encodeURIComponent(o.code)+'&accountName='+encodeURIComponent(CFG.bankName)
+      :(method==='momo'?CFG.momoQR:CFG.alipayQR);
+    ph.style.display='none';img.style.display='block';img.src=url;
+    img.onerror=function(){img.style.display='none';ph.style.display='grid';T('qr-ph-s',method==='bank'?'无法加载 VietQR':'请将图片 '+(method==='momo'?CFG.momoQR:CFG.alipayQR)+' 放在同一文件夹')};
+  }
+  [].forEach.call(document.querySelectorAll('input[name=qm]'),function(r){r.onchange=function(){method=r.value;showQR()}});
+  showQR();
+
+  /* --- 倒计时 --- */
+  var TOTAL=CFG.minutes*60*1000,key='qr_deadline_'+o.code,deadline,tick,paid=false;
+  function start(fresh){
+    var d=+sessionStorage.getItem(key);
+    deadline=(!fresh&&d>Date.now())?d:Date.now()+TOTAL;
+    try{sessionStorage.setItem(key,deadline)}catch(e){}
+    $('qr-box').classList.remove('expired');$('status').textContent='⏳ 正在等待您付款…';$('demo').disabled=false;
+    clearInterval(tick);tick=setInterval(step,250);step();
+  }
+  function step(){
+    var left=Math.max(0,deadline-Date.now()),s=Math.ceil(left/1000);
+    $('clock').textContent=('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2);
+    $('bar').style.width=(left/TOTAL*100)+'%';
+    $('clock').classList.toggle('warn',left<60000);
+    if(left<=0&&!paid){clearInterval(tick);$('qr-box').classList.add('expired');$('status').textContent='⚠ 二维码已过期，请重新生成。';$('demo').disabled=true}
+  }
+  $('qr-renew').onclick=function(){start(true)};
+
+  /* --- 支付成功 --- */
+  function onPaid(){
+    if(paid)return;paid=true;clearInterval(tick);clearInterval(poll);
+    $('status').textContent='✓ 已收到付款';
+    T('pop-name',o.name||'贵宾');T('pop-amt',fmt(o.due));T('pop-code',o.code);
+    $('pop').classList.add('on');
+    [].forEach.call(document.querySelectorAll('#bk-steps .bk-step'),function(li){li.classList.add('is-done');li.classList.remove('is-active');li.querySelector('b').textContent='\u2713'});
+    try{sessionStorage.removeItem('booking');sessionStorage.removeItem('booking2');sessionStorage.removeItem(key)}catch(e){}
+  }
+  $('pop-ok').onclick=function(){location.href=CFG.home};
+  if(!CFG.demo)$('demo').style.display='none';
+  $('demo').onclick=function(){
+    var b=$('demo');b.disabled=true;$('status').textContent='⏳ 正在提交订单信息…';
+    fetch(CFG.api+'/api/bookings/paid',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},o,{lang:'zh'}))})
+      .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||'HTTP '+r.status);return j})})
+      .then(function(j){if(j.status==='Confirmed'||j.status==='CheckedIn'||j.status==='Completed')onPaid();else{$('status').textContent='⏳ 订单信息已提交 – 正在等待确认收款…';startPoll()}})
+      .catch(function(e){b.disabled=false;$('status').textContent='⚠ 提交失败，请重试：'+e.message});
+  };
+  function startPoll(){if(poll)return;poll=setInterval(function(){
+    fetch(CFG.api+'/api/bookings/'+encodeURIComponent(o.code)+'/status').then(function(r){return r.json()})
+      .then(function(j){if(j.status==='Confirmed'||j.status==='CheckedIn'||j.status==='Completed')onPaid()}).catch(function(){})},3000)}
+
+  /* TODO: 正式系统——每3秒向服务器查询订单是否已支付（银行/支付宝/微信回调）：
+     fetch('/api/payment-status?code='+o.code).then(r=>r.json()).then(j=>{if(j.paid)onPaid()}) */
+  var poll=null;
+  start(false);
+})();
+</script>
+</body>
+</html>
