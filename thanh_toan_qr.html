@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>3Hills Homestay HaLong | Quét mã thanh toán</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dat_phong.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="thanh_toan.css">
+    <link rel="stylesheet" href="thanh_toan_qr.css">
+    <link rel="icon" type="image/x-icon" href="logoduan.png">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="mobile.js" defer></script>
+</head>
+<body>
+<div class="hd" id="hd" role="banner">
+  <a href="../trang_chu/home.html" class="hd-brand">
+    <img src="logoduan.png" alt="3HILLS" style="width:50px;height:50px;object-fit:cover;border-radius:18px;box-shadow:0 6px 16px rgba(0,0,0,.15);flex-shrink:0">
+    YOUR BRAND<br />NAME
+  </a>
+  <nav class="hd-nav hd-glass" id="hd-nav" aria-label="Menu chính">
+    <span class="hd-pill" id="hd-pill"></span>
+    <a href="../trang_chu/home.html">Câu chuyện</a>
+    <a href="../hang_phong/hangphong.html">Hạng phòng</a>
+    <a href="../photo_walk/photo_walk.html">Photo Walk</a>
+  </nav>
+  <div class="hd-actions">
+    <div class="hd-lang hd-glass">
+      <a href="thanh_toan_qr.html" aria-current="true">Tiếng Việt</a>
+      <a href="扫码支付.html">中文</a>
+    </div>
+  </div>
+</div>
+
+<section class="hc">
+  <div class="hc-bg"></div>
+  <div class="hc-blob a"><i></i></div><div class="hc-blob b"><i></i></div><div class="hc-blob c"><i></i></div>
+  <h2 class="hc-sr">YOUR BRAND NAME | 扫码支付</h2>
+  <div class="hc-stage" aria-hidden="true">
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+  </div>
+
+  <div class="bk-wrap">
+    <main class="bk">
+      <header>
+        <div><h1>Quét Mã Thanh Toán</h1><p>Mở ứng dụng ngân hàng, MoMo hoặc Alipay / WeChat và quét mã bên dưới.</p></div>
+        <div class="note bk-glass">⏱ Mã có hiệu lực trong 5 phút</div>
+      </header>
+
+      <div class="qr-grid">
+        <section class="box bk-glass qr-card">
+          <div class="opts two" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 18px">
+            <label class="opt"><input type="radio" name="qm" value="bank">Tài khoản ngân hàng</label>
+            <label class="opt"><input type="radio" name="qm" value="momo">Ví MoMo</label>
+            <label class="opt"><input type="radio" name="qm" value="alipay">Alipay / WeChat</label>
+          </div>
+          <div class="qr-box" id="qr-box">
+            <img id="qr-img" alt="Mã QR thanh toán">
+            <div class="qr-ph" id="qr-ph">Chưa có ảnh QR<br><small id="qr-ph-s"></small></div>
+            <div class="qr-exp" id="qr-exp"><b>Mã đã hết hạn</b><button type="button" id="qr-renew">Tạo mã mới</button></div>
+          </div>
+          <div class="amt" id="q-amt" style="margin-top:14px"></div>
+          <div class="hint" style="margin:4px 0 0">Nội dung chuyển khoản: <b id="q-code" style="color:var(--ink)"></b></div>
+        </section>
+
+        <section class="box bk-glass">
+          <div class="l">Thời hạn thanh toán còn lại</div>
+          <div class="clock" id="clock">05:00</div>
+          <div class="bar"><i id="bar"></i></div>
+          <div class="status" id="status">⏳ Đang chờ bạn thanh toán…</div>
+          <ol class="how">
+            <li>Mở ứng dụng ngân hàng, MoMo hoặc Alipay / WeChat.</li>
+            <li>Quét mã QR và kiểm tra đúng số tiền, nội dung.</li>
+            <li>Xác nhận thanh toán – trang sẽ tự thông báo khi nhận được tiền.</li>
+          </ol>
+          <button type="button" id="demo" style="margin-top:16px;width:100%">Tôi đã thanh toán (mô phỏng)</button>
+        </section>
+      </div>
+
+      <section class="sum bk-glass" style="display:block">
+        <h3>Thông tin tài khoản ngân hàng (để đối chiếu)</h3>
+        <div class="info">
+          <div><span>Ngân hàng</span><b id="k-bank"></b></div>
+          <div><span>Số tài khoản</span><b><em id="k-acc" style="font-style:normal"></em><button type="button" class="cp" data-copy="k-acc">Sao chép</button></b></div>
+          <div><span>Chủ tài khoản</span><b id="k-name"></b></div>
+          <div><span>Số tiền cần chuyển</span><b id="k-amt"></b></div>
+          <div><span>Nội dung chuyển khoản</span><b><em id="k-code" style="font-style:normal"></em><button type="button" class="cp" data-copy="k-code">Sao chép</button></b></div>
+          <div><span>Chi nhánh</span><b id="k-br"></b></div>
+        </div>
+        <p class="hint" style="margin:14px 0 0">Vui lòng ghi đúng nội dung chuyển khoản để hệ thống tự động xác nhận đơn.</p>
+      </section>
+
+      <section class="sum bk-glass" style="display:block;margin-top:22px">
+        <h3>Thông tin khách hàng &amp; đặt phòng</h3>
+        <div class="info">
+          <div><span>Khách hàng</span><b id="i-name"></b></div>
+          <div><span>Số điện thoại</span><b id="i-phone"></b></div>
+          <div><span>Hạng phòng</span><b id="i-room"></b></div>
+          <div><span>Nhận phòng</span><b id="i-in"></b></div>
+          <div><span>Trả phòng</span><b id="i-out"></b></div>
+          <div><span>Số đêm / khách</span><b id="i-n"></b></div>
+          <div><span>Dịch vụ thêm</span><b id="i-svc"></b></div>
+          <div><span>Chính sách</span><b id="i-pol"></b></div>
+          <div><span>Mã giảm giá</span><b id="i-cp"></b></div>
+          <div><span>Hóa đơn điện tử</span><b id="i-inv"></b></div>
+          <div><span>Tổng đơn</span><b id="i-tot"></b></div>
+          <div><span>Mã đơn</span><b id="i-code"></b></div>
+        </div>
+      </section>
+    </main>
+
+    <ol class="bk-steps" id="bk-steps" aria-label="Tiến trình đặt phòng">
+      <li class="bk-step is-done" data-step="1"><span class="bk-dot"><b>✓</b></span></li>
+      <li class="bk-line is-full" aria-hidden="true"><i></i></li>
+      <li class="bk-step is-done" data-step="2"><span class="bk-dot"><b>✓</b></span></li>
+      <li class="bk-line is-full" aria-hidden="true"><i></i></li>
+      <li class="bk-step is-active" aria-current="step" data-step="3"><span class="bk-dot"><b>3</b></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Thông báo thanh toán thành công (nằm ngoài .bk để không bị lỗi lớp kính) -->
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-t">
+  <div class="pop-card">
+    <div class="tick">✓</div>
+    <h2 id="pop-t">Thanh toán thành công!</h2>
+    <p>Cảm ơn <b id="pop-name"></b>. Chúng tôi đã nhận <b id="pop-amt"></b> cho đơn <b id="pop-code"></b>.</p>
+    <p class="pop-s">Xác nhận đặt phòng sẽ được gửi qua SĐT / Zalo / WeChat của bạn.</p>
+    <button type="button" id="pop-ok">Hoàn tất</button>
+  </div>
+</div>
+
+<script>
+/* Hero chữ chạy + header: dùng lại logic của trang đặt phòng */
+(function(){
+  var TEXT='YOUR BRAND NAME',SPEED=[64,52,78,58,70],OFF=[0,.3,.55,.8,.15];
+  function item(){var s=document.createElement('span');s.className='hc-item';s.innerHTML='<span class="hc-t"></span><i class="hc-dot"></i>';s.firstChild.textContent=TEXT;return s}
+  var el=document.querySelector('.hc'),rows=[].slice.call(el.querySelectorAll('.hc-row'));
+  function build(){rows.forEach(function(row,i){var t=row.querySelector('.hc-track');t.innerHTML='';var g=document.createElement('div');g.className='hc-group';g.appendChild(item());t.appendChild(g);
+    var w=g.getBoundingClientRect().width||1,n=Math.max(1,Math.ceil(el.clientWidth/w));for(var k=1;k<n;k++)g.appendChild(item());
+    var gw=g.getBoundingClientRect().width,c=g.cloneNode(true);c.setAttribute('aria-hidden','true');t.appendChild(c);
+    var d=gw/SPEED[i];t.style.animationDuration=d+'s';t.style.animationDelay=(-d*OFF[i])+'s'})}
+  var tm;window.addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(build,200)});build();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(build);
+  el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--hc-mx',((e.clientX-r.left)/r.width-.5).toFixed(3));el.style.setProperty('--hc-my',((e.clientY-r.top)/r.height-.5).toFixed(3))},{passive:true});
+  var nav=document.getElementById('hd-nav'),pill=document.getElementById('hd-pill'),hd=document.getElementById('hd');
+  function move(a){pill.style.width=a.offsetWidth+'px';pill.style.transform='translateX('+(a.offsetLeft-6)+'px)';pill.classList.add('on')}
+  [].forEach.call(nav.querySelectorAll('a'),function(a){a.addEventListener('mouseenter',function(){move(a)})});
+  nav.addEventListener('mouseleave',function(){pill.classList.remove('on')});
+  window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>30)},{passive:true});
+})();
+
+
+/* ===== Trang 3: QR + đếm ngược 5 phút ===== */
+(function(){
+  /* --- CẤU HÌNH: thay bằng thông tin thật --- */
+  var CFG={bankBin:'VCB',bankLabel:'Vietcombank (VCB)',bankBranch:'Chi nhánh Quảng Ninh',bankAcc:'0123456789',bankName:'TEN CHU TAI KHOAN',alipayQR:'qr_alipay.png',momoQR:'qr_momo.png',
+           minutes:5,demo:true,api:'',home:'/trang_chu/home.html'};
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return Math.round(n).toLocaleString('vi-VN')+'đ'};
+  var o=null;
+  try{var q=new URLSearchParams(location.search).get('d');if(q)o=JSON.parse(q)}catch(e){}
+  if(!o){try{o=JSON.parse(sessionStorage.getItem('booking2')||'null')}catch(e){}}
+  if(!o){location.replace('dat_phong.html');return}
+  var POL={deposit:'Đặt cọc (30%)',prepaid:'Trả trước (100%)',postpaid:'Trả sau'};
+  var T=function(id,v){$(id).textContent=v};
+  T('i-name',o.name||'—');T('i-phone',o.phone||'—');T('i-room',o.room);T('i-in',o.cin||'—');T('i-out',o.cout||'—');
+  T('i-n',o.nights+' đêm / '+(o.guests||'—'));T('i-svc',o.services&&o.services.length?o.services.join(', '):'Không');
+  T('i-pol',POL[o.policy]||'—');T('i-cp',o.coupon?o.coupon+' (-'+fmt(o.discount)+')':'Không');
+  T('i-inv',o.invoice?o.invoice.co+' – MST '+o.invoice.tax:'Không');T('i-tot',fmt(o.total));T('i-code',o.code);
+  T('q-amt',fmt(o.due));T('q-code',o.code);
+  T('k-bank',CFG.bankLabel);T('k-acc',CFG.bankAcc);T('k-name',CFG.bankName);T('k-amt',fmt(o.due));T('k-code',o.code);T('k-br',CFG.bankBranch);
+  [].forEach.call(document.querySelectorAll('.cp[data-copy]'),function(b){b.onclick=function(){
+    var t=$(b.dataset.copy).textContent,old=b.textContent;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){}).then(function(){b.textContent='Đã chép ✓';setTimeout(function(){b.textContent=old},1500)})}});
+
+  /* --- QR theo phương thức --- */
+  var method=(o.method==='alipay'||o.method==='momo')?o.method:'bank';
+  var img=$('qr-img'),ph=$('qr-ph');
+  function showQR(){
+    document.querySelector('input[name=qm][value='+method+']').checked=true;
+    var url=method==='bank'
+      ?'https://img.vietqr.io/image/'+CFG.bankBin+'-'+CFG.bankAcc+'-compact2.png?amount='+o.due+'&addInfo='+encodeURIComponent(o.code)+'&accountName='+encodeURIComponent(CFG.bankName)
+      :(method==='momo'?CFG.momoQR:CFG.alipayQR);
+    ph.style.display='none';img.style.display='block';img.src=url;
+    img.onerror=function(){img.style.display='none';ph.style.display='grid';T('qr-ph-s',method==='bank'?'Không tải được VietQR':'Đặt ảnh '+(method==='momo'?CFG.momoQR:CFG.alipayQR)+' cùng thư mục')};
+  }
+  [].forEach.call(document.querySelectorAll('input[name=qm]'),function(r){r.onchange=function(){method=r.value;showQR()}});
+  showQR();
+
+  /* --- Đếm ngược --- */
+  var TOTAL=CFG.minutes*60*1000,key='qr_deadline_'+o.code,deadline,tick,paid=false;
+  function start(fresh){
+    var d=+sessionStorage.getItem(key);
+    deadline=(!fresh&&d>Date.now())?d:Date.now()+TOTAL;
+    try{sessionStorage.setItem(key,deadline)}catch(e){}
+    $('qr-box').classList.remove('expired');$('status').textContent='⏳ Đang chờ bạn thanh toán…';$('demo').disabled=false;
+    clearInterval(tick);tick=setInterval(step,250);step();
+  }
+  function step(){
+    var left=Math.max(0,deadline-Date.now()),s=Math.ceil(left/1000);
+    $('clock').textContent=('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2);
+    $('bar').style.width=(left/TOTAL*100)+'%';
+    $('clock').classList.toggle('warn',left<60000);
+    if(left<=0&&!paid){clearInterval(tick);$('qr-box').classList.add('expired');$('status').textContent='⚠ Mã đã hết hạn. Vui lòng tạo mã mới.';$('demo').disabled=true}
+  }
+  $('qr-renew').onclick=function(){start(true)};
+
+  /* --- Thanh toán thành công --- */
+  function onPaid(){
+    if(paid)return;paid=true;clearInterval(tick);clearInterval(poll);
+    $('status').textContent='✓ Đã nhận thanh toán';
+    T('pop-name',o.name||'quý khách');T('pop-amt',fmt(o.due));T('pop-code',o.code);
+    $('pop').classList.add('on');
+    [].forEach.call(document.querySelectorAll('#bk-steps .bk-step'),function(li){li.classList.add('is-done');li.classList.remove('is-active');li.querySelector('b').textContent='\u2713'});
+    try{sessionStorage.removeItem('booking');sessionStorage.removeItem('booking2');sessionStorage.removeItem(key)}catch(e){}
+  }
+  $('pop-ok').onclick=function(){location.href=CFG.home};
+  if(!CFG.demo)$('demo').style.display='none';
+  $('demo').onclick=function(){
+    var b=$('demo');b.disabled=true;$('status').textContent='⏳ Đang gửi thông tin đặt phòng…';
+    fetch(CFG.api+'/api/bookings/paid',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},o,{lang:'vi'}))})
+      .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||'HTTP '+r.status);return j})})
+      .then(function(j){if(j.status==='Confirmed'||j.status==='CheckedIn'||j.status==='Completed')onPaid();else{$('status').textContent='⏳ Đã gửi thông tin – đang chờ xác nhận đã nhận tiền…';startPoll()}})
+      .catch(function(e){b.disabled=false;$('status').textContent='⚠ Không gửi được, vui lòng thử lại: '+e.message});
+  };
+  function startPoll(){if(poll)return;poll=setInterval(function(){
+    fetch(CFG.api+'/api/bookings/'+encodeURIComponent(o.code)+'/status').then(function(r){return r.json()})
+      .then(function(j){if(j.status==='Confirmed'||j.status==='CheckedIn'||j.status==='Completed')onPaid()}).catch(function(){})},3000)}
+
+  /* TODO: hệ thống thật – hỏi server mỗi 3 giây xem đơn đã được thanh toán chưa (webhook ngân hàng/Alipay/WeChat):
+     fetch('/api/payment-status?code='+o.code).then(r=>r.json()).then(j=>{if(j.paid)onPaid()}) */
+  var poll=null;
+  start(false);
+})();
+</script>
+</body>
+</html>

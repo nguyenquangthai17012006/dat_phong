@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3Hills Homestay HaLong | Thanh toán</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dat_phong.css">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="thanh_toan.css">
+<link rel="icon" type="image/x-icon" href="logoduan.png">
+<link rel="stylesheet" href="mobile.css">
+<script src="mobile.js" defer></script>
+</head>
+<body>
+<div class="hd" id="hd" role="banner">
+  <a href="../trang_chu/home.html" class="hd-brand">
+    <img src="logoduan.png" alt="3HILLS" style="width:50px;height:50px;object-fit:cover;border-radius:18px;box-shadow:0 6px 16px rgba(0,0,0,.15);flex-shrink:0">
+    YOUR BRAND<br />NAME
+  </a>
+  <nav class="hd-nav hd-glass" id="hd-nav" aria-label="Menu chính">
+    <span class="hd-pill" id="hd-pill"></span>
+    <a href="../trang_chu/home.html">Câu chuyện</a>
+    <a href="../hang_phong/hangphong.html">Hạng phòng</a>
+  </nav>
+  <div class="hd-actions">
+    <div class="hd-lang hd-glass">
+      <a href="付款.html" aria-current="true">Tiếng Việt</a>
+      <a href="thanh_toan.html">中文</a>
+    </div>
+  </div>
+</div>
+
+<section class="hc">
+  <div class="hc-bg"></div>
+  <div class="hc-blob a"><i></i></div><div class="hc-blob b"><i></i></div><div class="hc-blob c"><i></i></div>
+  <h2 class="hc-sr">YOUR BRAND NAME | Thanh toán</h2>
+  <div class="hc-stage" aria-hidden="true">
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+    <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+    <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+  </div>
+
+  <div class="bk-wrap">
+    <main class="bk">
+      <header>
+        <div><h1>Thanh Toán</h1><p>Chọn phương thức, chính sách và ưu đãi phù hợp để hoàn tất đặt phòng.</p></div>
+        <div class="note bk-glass">🔒 Thông tin thanh toán được bảo mật</div>
+      </header>
+
+      <div id="bk-form">
+        <section class="sum bk-glass" id="booked" style="margin-top:22px;margin-bottom:0">
+          <div>
+            <h3>Phòng bạn đã chọn</h3>
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700" id="b-room"></div>
+            <div class="meta" style="margin-top:8px">
+              <span>Nhận phòng: <b id="b-in"></b></span>•
+              <span>Trả phòng: <b id="b-out"></b></span>•
+              <span>Khách: <b id="b-g"></b></span>
+            </div>
+            <div class="meta" style="margin-top:6px">
+              <span>Người đặt: <b id="b-name"></b></span>•
+              <span>Dịch vụ thêm: <b id="b-svc"></b></span>
+            </div>
+          </div>
+          <div class="total"><small id="b-rate"></small><span class="amt" id="b-sub"></span></div>
+        </section>
+
+        <div class="l sec">Phương thức thanh toán</div>
+        <div class="opts auto" id="methods">
+          <label class="opt"><input type="radio" name="method" value="momo" checked>Ví MoMo</label>
+          <label class="opt"><input type="radio" name="method" value="card">Thẻ tín dụng hoặc ghi nợ</label>
+          <label class="opt"><input type="radio" name="method" value="bank">Tài khoản ngân hàng / Mã QR</label>
+          <label class="opt"><input type="radio" name="method" value="alipay">Thanh toán bằng Alipay / WeChat</label>
+          <label class="opt"><input type="radio" name="method" value="cash">Thanh toán trực tiếp khi nhận phòng</label>
+        </div>
+        <div class="hint" id="m-hint"></div>
+        <div class="reveal bk-glass" id="card-box">
+          <div class="grid g4" style="margin-top:0">
+            <div style="grid-column:span 2"><label class="l" for="cn">Số thẻ</label><input id="cn" inputmode="numeric" placeholder="1234 5678 9012 3456"></div>
+            <div><label class="l" for="ce">Hết hạn</label><input id="ce" inputmode="numeric" placeholder="MM/YY"></div>
+            <div><label class="l" for="cv">CVV</label><input id="cv" type="password" inputmode="numeric" maxlength="4" placeholder="123"></div>
+          </div>
+        </div>
+
+        <div class="l sec">Chính sách</div>
+        <div class="opts two" id="policies">
+          <label class="opt"><input type="checkbox" class="pol" value="deposit" checked>Đặt cọc (30%)</label>
+          <label class="opt"><input type="checkbox" class="pol" value="prepaid">Trả trước (100%)</label>
+          <label class="opt"><input type="checkbox" class="pol" value="postpaid">Trả sau</label>
+        </div>
+
+        <div class="l sec">Ưu đãi</div>
+        <div class="opts two">
+          <label class="opt"><input type="checkbox" id="use-coupon">Áp dụng mã giảm giá và khuyến mãi</label>
+          <label class="opt"><input type="checkbox" id="use-inv">Xuất hóa đơn điện tử (e-Invoice)</label>
+        </div>
+        <div class="reveal bk-glass" id="coupon-box">
+          <label class="l" for="coupon">Nhập mã giảm giá</label>
+          <div class="code-row">
+            <div><input id="coupon" placeholder="Ví dụ: HALONG10" autocomplete="off"><div class="err" id="c-err"></div><div class="okmsg" id="c-ok"></div></div>
+            <button type="button" id="c-apply">Áp dụng</button>
+          </div>
+        </div>
+        <div class="reveal bk-glass" id="inv-box">
+          <div class="grid g3" style="margin-top:0">
+            <div><label class="l" for="iv-co">Tên công ty / cá nhân</label><input id="iv-co"></div>
+            <div><label class="l" for="iv-tax">Mã số thuế</label><input id="iv-tax" inputmode="numeric"></div>
+            <div><label class="l" for="iv-mail">Email nhận hóa đơn</label><input id="iv-mail" type="email"></div>
+          </div>
+        </div>
+
+        <section class="sum bk-glass">
+          <div>
+            <h3>Tóm tắt thanh toán</h3>
+            <div class="meta">
+              <span><b id="s-room"></b> • <b id="s-n"></b></span>•
+              <span>Tạm tính: <b id="s-sub"></b></span>•
+              <span>Giảm giá: <b id="s-dis">0đ</b></span>•
+              <span>Tổng đơn: <b id="s-tot"></b></span>
+            </div>
+          </div>
+          <div class="cta">
+            <div class="total"><small id="due-lbl">Cần thanh toán ngay:</small><span class="amt" id="s-due">0đ</span></div>
+            <button id="pay" type="button">Xác nhận thanh toán</button>
+          </div>
+        </section>
+        <div class="err" id="err" style="text-align:right"></div>
+      </div>
+
+      <section class="ok bk-glass" id="ok">
+        <div class="tick">✓</div>
+        <h2>Cảm ơn bạn!</h2>
+        <p style="color:var(--muted)">Đơn <b id="ok-code" style="color:var(--ink)"></b> đã được ghi nhận. Xác nhận sẽ gửi qua SĐT / Zalo / WeChat của bạn.</p>
+      </section>
+    </main>
+
+    <ol class="bk-steps" id="bk-steps" aria-label="Tiến trình đặt phòng">
+      <li class="bk-step is-done" data-step="1"><span class="bk-dot"><b>✓</b></span></li>
+      <li class="bk-line is-full" aria-hidden="true"><i></i></li>
+      <li class="bk-step is-active" aria-current="step" data-step="2"><span class="bk-dot"><b>2</b></span></li>
+      <li class="bk-line" aria-hidden="true"><i></i></li>
+      <li class="bk-step" data-step="3"><span class="bk-dot"><b>3</b></span></li>
+    </ol>
+  </div>
+</section>
+
+<script>
+/* Hero chữ chạy + header: dùng lại logic của trang đặt phòng */
+(function(){
+  var TEXT='YOUR BRAND NAME',SPEED=[64,52,78,58,70],OFF=[0,.3,.55,.8,.15];
+  function item(){var s=document.createElement('span');s.className='hc-item';s.innerHTML='<span class="hc-t"></span><i class="hc-dot"></i>';s.firstChild.textContent=TEXT;return s}
+  var el=document.querySelector('.hc'),rows=[].slice.call(el.querySelectorAll('.hc-row'));
+  function build(){rows.forEach(function(row,i){var t=row.querySelector('.hc-track');t.innerHTML='';var g=document.createElement('div');g.className='hc-group';g.appendChild(item());t.appendChild(g);
+    var w=g.getBoundingClientRect().width||1,n=Math.max(1,Math.ceil(el.clientWidth/w));for(var k=1;k<n;k++)g.appendChild(item());
+    var gw=g.getBoundingClientRect().width,c=g.cloneNode(true);c.setAttribute('aria-hidden','true');t.appendChild(c);
+    var d=gw/SPEED[i];t.style.animationDuration=d+'s';t.style.animationDelay=(-d*OFF[i])+'s'})}
+  var tm;window.addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(build,200)});build();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(build);
+  el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--hc-mx',((e.clientX-r.left)/r.width-.5).toFixed(3));el.style.setProperty('--hc-my',((e.clientY-r.top)/r.height-.5).toFixed(3))},{passive:true});
+  var nav=document.getElementById('hd-nav'),pill=document.getElementById('hd-pill'),hd=document.getElementById('hd');
+  function move(a){pill.style.width=a.offsetWidth+'px';pill.style.transform='translateX('+(a.offsetLeft-6)+'px)';pill.classList.add('on')}
+  [].forEach.call(nav.querySelectorAll('a'),function(a){a.addEventListener('mouseenter',function(){move(a)})});
+  nav.addEventListener('mouseleave',function(){pill.classList.remove('on')});
+  window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',scrollY>30)},{passive:true});
+})();
+
+/* Thanh toán */
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return Math.round(n).toLocaleString('vi-VN')+'đ'};
+  var o=null;
+  try{var q=new URLSearchParams(location.search).get('d');if(q)o=JSON.parse(q)}catch(e){}
+  if(!o){try{o=JSON.parse(sessionStorage.getItem('booking')||'null')}catch(e){}}
+  if(!o){
+    o={room:'(chưa có dữ liệu đặt phòng)',nights:0,rate:0,svc:0};
+    var w=document.createElement('div');w.className='err';w.style.cssText='font-size:14px;margin-top:14px';
+    w.innerHTML='Chưa nhận được dữ liệu từ trang đặt phòng. <a href="dat_phong.html">Quay lại đặt phòng</a> rồi bấm “Tiếp”.';
+    document.querySelector('.bk header').after(w);
+  }
+  var sub=o.rate*o.nights+o.svc,discount=0,code='HCB'+Date.now().toString().slice(-6);
+  var T=function(id,v){$(id).textContent=v};
+  T('b-room',o.room);T('b-in',o.cin||'—');T('b-out',o.cout||'—');T('b-g',o.guests||'—');
+  T('b-name',(o.name||'—')+(o.phone?' – '+o.phone:''));
+  T('b-svc',o.services&&o.services.length?o.services.join(', '):'Không');
+  T('b-rate',fmt(o.rate)+'/đêm × '+o.nights+' đêm + dịch vụ');T('b-sub',fmt(o.rate*o.nights+o.svc));
+  $('s-room').textContent=o.room;$('s-n').textContent=o.nights+' đêm';$('s-sub').textContent=fmt(sub);
+
+  var HINTS={momo:'Quét mã hoặc mở ứng dụng MoMo để thanh toán sau khi xác nhận.',card:'Nhập thông tin thẻ Visa / Mastercard / JCB bên dưới.',bank:'Chuyển khoản hoặc quét mã QR ngân hàng, nội dung chuyển khoản là mã đơn.',alipay:'Dành cho khách quốc tế: quét mã Alipay / WeChat Pay.',cash:'Thanh toán tại quầy lễ tân khi nhận phòng.'};
+  var COUPONS={HALONG10:{pct:10,t:'Giảm 10%'},WELCOME100:{off:100000,t:'Giảm 100.000đ'},ALIPAY5:{pct:5,t:'Giảm 5%'}};
+
+  var pols=[].slice.call(document.querySelectorAll('.pol'));
+  pols.forEach(function(c){c.addEventListener('change',function(){
+    if(c.checked)pols.forEach(function(x){if(x!==c)x.checked=false});else c.checked=true; /* luôn có một chính sách */
+    calc()})});
+
+  function method(){return document.querySelector('input[name=method]:checked').value}
+  [].forEach.call(document.querySelectorAll('input[name=method]'),function(r){r.addEventListener('change',function(){
+    $('m-hint').textContent=HINTS[method()];$('card-box').classList.toggle('on',method()==='card');$('err').textContent=''})});
+  $('m-hint').textContent=HINTS.momo;
+
+  $('use-coupon').addEventListener('change',function(){
+    $('coupon-box').classList.toggle('on',this.checked);
+    if(this.checked)$('coupon').focus();
+    else{discount=0;$('coupon').value='';$('c-err').textContent='';$('c-ok').textContent='';calc()}
+  });
+  $('use-inv').addEventListener('change',function(){$('inv-box').classList.toggle('on',this.checked)});
+
+  function applyCoupon(){
+    var v=$('coupon').value.trim().toUpperCase(),c=COUPONS[v];
+    $('c-err').textContent='';$('c-ok').textContent='';
+    if(!v){$('c-err').textContent='Vui lòng nhập mã giảm giá.';return}
+    if(!c){discount=0;$('c-err').textContent='Mã không hợp lệ hoặc đã hết hạn.';calc();return}
+    discount=Math.min(sub,c.pct?sub*c.pct/100:c.off);
+    $('c-ok').textContent='✓ Đã áp dụng: '+c.t;calc();
+  }
+  $('c-apply').onclick=applyCoupon;
+  $('coupon').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();applyCoupon()}});
+
+  var shown=0,raf,dueNow=0,polNow='deposit';
+  function animate(t){cancelAnimationFrame(raf);var f=shown,t0=performance.now(),el=$('s-due');
+    el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
+    (function s(n){var p=Math.min(1,(n-t0)/500),e=1-Math.pow(1-p,3);shown=f+(t-f)*e;el.textContent=fmt(shown);if(p<1)raf=requestAnimationFrame(s)})(t0)}
+  function calc(){
+    var total=sub-discount,pol=document.querySelector('.pol:checked').value;
+    var due=pol==='prepaid'?total:pol==='deposit'?total*.3:0;
+    if(method()==='cash'&&pol!=='postpaid'){/* vẫn tính theo chính sách đã chọn */}
+    $('s-dis').textContent=discount?'-'+fmt(discount):'0đ';$('s-tot').textContent=fmt(total);
+    $('due-lbl').textContent=pol==='postpaid'?'Thanh toán khi nhận/trả phòng:':'Cần thanh toán ngay:';
+    dueNow=pol==='postpaid'?0:due;polNow=pol;animate(dueNow);
+  }
+  calc();
+
+  $('pay').onclick=function(){
+    var err='';
+    if(method()==='card'&&($('cn').value.replace(/\s/g,'').length<13||$('ce').value.trim().length<4||$('cv').value.length<3))err='Vui lòng nhập đầy đủ thông tin thẻ.';
+    if($('use-coupon').checked&&$('coupon').value.trim()&&!discount)err='Bạn chưa áp dụng mã giảm giá – bấm “Áp dụng” hoặc bỏ tích ô mã giảm giá.';
+    if($('use-inv').checked&&(!$('iv-co').value.trim()||!$('iv-tax').value.trim()||!$('iv-mail').value.trim()))err='Vui lòng nhập đủ thông tin xuất hóa đơn điện tử.';
+    $('err').textContent=err;if(err)return;
+    var d=Object.assign({},o,{code:code,method:method(),discount:discount,coupon:$('coupon').value.trim().toUpperCase(),
+      total:sub-discount,due:Math.round(dueNow),policy:polNow,
+      invoice:$('use-inv').checked?{co:$('iv-co').value,tax:$('iv-tax').value,mail:$('iv-mail').value}:null});
+    /* Cần trả ngay bằng QR -> sang trang 3; đơn được lưu ở trang đó */
+    if((method()==='bank'||method()==='momo'||method()==='alipay')&&dueNow>0){
+      try{sessionStorage.setItem('booking2',JSON.stringify(d))}catch(e){}
+      location.href='thanh_toan_qr.html?d='+encodeURIComponent(JSON.stringify(d));return;
+    }
+    /* Các trường hợp còn lại (trả sau / tiền mặt / thẻ): LƯU ĐƠN vào database rồi mới báo thành công */
+    var btn=$('pay');if(btn.disabled)return;btn.disabled=true;
+    fetch('/api/bookings/paid',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},d,{lang:'vi'}))})
+      .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})})
+      .then(function(){
+        $('bk-form').style.display='none';$('ok').classList.add('on');$('ok-code').textContent=code;
+        [].forEach.call(document.querySelectorAll('#bk-steps .bk-step'),function(li){li.classList.add('is-done');li.classList.remove('is-active');li.querySelector('b').textContent='\u2713'});
+        [].forEach.call(document.querySelectorAll('#bk-steps .bk-line'),function(l){l.classList.add('is-full')});
+        try{sessionStorage.removeItem('booking')}catch(e){}
+      })
+      .catch(function(e){btn.disabled=false;$('err').textContent='Không lưu được đơn đặt phòng, vui lòng thử lại: '+e.message});
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>3Hills – Quản lý đặt phòng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="logoduan.png">
+<style>
+   :root
+   {
+     --teal:#0f3b3f;
+     --org:#a94a0a;
+     --bg:#f7efe8;
+     --line:#e3d3c4;
+     --ink:#2b1608
+   }
+   *
+   {
+     box-sizing:border-box
+   }
+   body
+   {
+     margin:0;
+     font:14px/1.5 system-ui,"Segoe UI",sans-serif;
+     background:var(--bg);
+     color:var(--ink)
+   }
+   header
+   {
+     background:var(--teal);
+     color:#fff;
+     padding:14px 22px;
+     display:flex;
+     gap:16px;
+     align-items:center;
+     flex-wrap:wrap
+   }
+   header h1
+   {
+     font-size:18px;
+     margin:0;
+     flex:1
+   }
+   header b
+   {
+     background:#ffd21f;
+     color:var(--teal);
+     border-radius:99px;
+     padding:2px 10px
+   }
+   #banner
+   {
+     margin:0 0 14px;
+     padding:11px 14px;
+     border-radius:10px;
+     background:#fdf1ef;
+     border:1px solid #f1c9c4;
+     color:#b3261e;
+     font-weight:600
+   }
+   main
+   {
+     padding:18px 22px
+   }
+   .bar
+   {
+     display:flex;
+     gap:10px;
+     flex-wrap:wrap;
+     margin-bottom:14px;
+     align-items:center
+   }
+   input,select,button
+   {
+     font:inherit;
+     padding:8px 12px;
+     border:1px solid var(--line);
+     border-radius:10px;
+     background:#fff;
+     color:var(--ink)
+   }
+   button
+   {
+     background:var(--org);
+     color:#fff;
+     border:0;
+     cursor:pointer
+   }
+   button.g
+   {
+     background:#fff;
+     color:var(--ink);
+     border:1px solid var(--line)
+   }
+   button.d
+   {
+     background:#b3261e
+   }
+   .w
+   {
+     overflow-x:auto;
+     background:#fff;
+     border-radius:14px;
+     border:1px solid var(--line)
+   }
+   table
+   {
+     border-collapse:collapse;
+     width:100%;
+     min-width:980px
+   }
+   th,td
+   {
+     padding:10px 12px;
+     text-align:left;
+     border-bottom:1px solid var(--line);
+     vertical-align:top
+   }
+   th
+   {
+     background:#fbf5ef;
+     font-size:12px;
+     text-transform:uppercase;
+     letter-spacing:.05em
+   }
+   tr.p td:first-child
+   {
+     border-left:4px solid #ffb300
+   }
+   .det td
+   {
+     background:#fffaf5
+   }
+   .det dl
+   {
+     display:grid;
+     grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+     gap:8px 20px;
+     margin:0
+   }
+   .det dt
+   {
+     font-size:11px;
+     text-transform:uppercase;
+     color:#7a5440
+   }
+   .det dd
+   {
+     margin:0;
+     font-weight:600;
+     word-break:break-word
+   }
+   .hide
+   {
+     display:none!important
+   }
+   .mut
+   {
+     color:#7a5440;
+     font-size:12px
+   }
+   header a.sec
+   {
+     color:#fff;
+     text-decoration:none;
+     border:1px solid rgba(255,255,255,.55);
+     border-radius:10px;
+     padding:8px 12px
+   }
+   header a.sec:hover
+   {
+     background:rgba(255,255,255,.15)
+   }
+</style>
+<style id="login-style">
+/* ===== MÀN HÌNH ĐĂNG NHẬP – chia đôi: video bên trái, tấm kính liquid glass bên phải ===== */
+  .lg
+  {
+    position:fixed;
+    inset:0;
+    z-index:50;
+    overflow:hidden;
+    font-family:"Jost",system-ui,sans-serif;
+    color:#10282b;
+  /* nền dự phòng khi chưa có video (gợi lại ảnh mẫu) */
+  background:
+    radial-gradient(38% 120% at -6% 50%,#8aa300 0 62%,transparent 63%),
+    radial-gradient(44% 120% at 2% 52%,#c9e285 0 60%,transparent 61%),
+    linear-gradient(100deg,#f4fdff 0%,#dff3ff 45%,#c6e9ff 100%)}
+  .lg *
+  {
+    box-sizing:border-box
+  }
+  .lg-vid
+  {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    filter:saturate(1.18) brightness(1.03)
+  }
+/* lớp "ảo": các đốm sáng trôi chậm, hòa vào video */
+  .lg-fx
+  {
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    mix-blend-mode:soft-light;
+    opacity:.85
+  }
+  .lg-fx i
+  {
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px)
+  }
+  .lg-fx i:nth-child(1)
+  {
+    width:46vmax;
+    height:46vmax;
+    left:-12vmax;
+    top:-12vmax;
+    background:#c9e285;
+    animation:lgf1 16s ease-in-out infinite alternate
+  }
+  .lg-fx i:nth-child(2)
+  {
+    width:42vmax;
+    height:42vmax;
+    left:18vw;
+    bottom:-16vmax;
+    background:#8fd8ff;
+    animation:lgf2 21s ease-in-out infinite alternate
+  }
+  .lg-fx i:nth-child(3)
+  {
+    width:34vmax;
+    height:34vmax;
+    left:40vw;
+    top:8vh;
+    background:#e0aaf0;
+    animation:lgf3 25s ease-in-out infinite alternate
+  }
+  @keyframes lgf1
+  {
+    to
+    {
+      transform:translate(18vmax,12vmax) scale(1.25)
+    }
+  }
+  @keyframes lgf2
+  {
+    to
+    {
+      transform:translate(-14vmax,-10vmax) scale(1.2)
+    }
+  }
+  @keyframes lgf3
+  {
+    to
+    {
+      transform:translate(-10vmax,14vmax) scale(.85)
+    }
+  }
+
+/* tấm kính bên phải, mép trái uốn lượn như chất lỏng */
+  .lg-panel
+  {
+    position:absolute;
+    z-index:2;
+    top:0;
+    right:0;
+    bottom:0;
+    width:min(50vw,720px);
+    min-width:480px;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    padding:28px 6% 28px 20%;
+    overflow-y:auto;
+    scrollbar-width:none;
+    background:rgba(255,255,255,.3);
+    -webkit-backdrop-filter:blur(26px) saturate(185%);
+    backdrop-filter:blur(26px) saturate(185%);
+    clip-path:url(#lgWave);
+    -webkit-clip-path:url(#lgWave)
+  }
+  .lg-panel::-webkit-scrollbar{
+    display:none
+  }
+  .lg-panel::before
+  {
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(115deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.28) 100%)
+  }
+  .lg-edge
+  {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:visible;
+    pointer-events:none
+  }
+  .lg-col
+  {
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:440px;
+    margin:auto;
+    text-align:center
+  }
+  .lg-logo
+  {
+    width:120px;
+    height:120px;
+    margin:0 auto 6px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#0f3b3f;
+    box-shadow:0 8px 24px rgba(15,59,63,.35),0 0 0 3px rgba(255,255,255,.65)
+  }
+  .lg-logo img
+  {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:scale(1.24)
+  }
+  .lg-title
+  {
+    margin:16px 0 2px;
+    font:800 clamp(24px,2.5vw,34px)/1.1 "Baloo 2","Jost",system-ui,sans-serif;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    color:#0a1f22
+  }
+  .lg-sub
+  {
+    margin:0 0 6px;
+    font:500 clamp(18px,1.7vw,24px) "Jost",system-ui,sans-serif;
+    letter-spacing:.04em
+  }
+  .lg-l
+  {
+    display:block;
+    text-align:left;
+    margin:16px 8px 7px;
+    font:500 16px "Jost",system-ui,sans-serif
+  }
+  .lg-in
+  {
+    display:block;
+    width:100%;
+    height:54px;
+    padding:0 22px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.85);
+    background:rgba(255,255,255,.42);
+    color:#0a1f22;
+    text-align:center;
+    font:500 17px "Jost",system-ui,sans-serif;
+    outline:0;
+    transition:.25s;
+    box-shadow:inset 0 1.5px 2px rgba(255,255,255,.7),0 4px 14px rgba(15,59,63,.12)
+  }
+  .lg-in::placeholder
+  {
+    color:rgba(16,40,43,.55)
+  }
+  .lg-in:focus
+  {
+    background:rgba(255,255,255,.62);
+    border-color:#fff;
+    box-shadow:inset 0 1.5px 2px rgba(255,255,255,.8),0 0 0 4px rgba(224,170,240,.55)
+  }
+  .lg-in:-webkit-autofill
+  {
+    -webkit-text-fill-color:#0a1f22;
+    transition:background-color 9999s ease-out
+  }
+  .lg-btn
+  {
+    display:block;
+    margin:30px auto 0;
+    min-width:230px;
+    height:58px;
+    padding:0 34px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.85);
+    cursor:pointer;
+    background:linear-gradient(180deg,rgba(238,196,250,.95),rgba(214,150,240,.9));
+    color:#1c0a28;
+    font:800 21px "Baloo 2","Jost",system-ui,sans-serif;
+    box-shadow:0 12px 28px rgba(150,70,190,.4),inset 0 1.5px 1px rgba(255,255,255,.9);
+    transition:transform .25s,filter .25s
+  }
+  .lg-btn:hover
+  {
+    transform:translateY(-2px);
+    filter:brightness(1.06)
+  }
+  .lg-btn:active
+  {
+    transform:scale(.97)
+  }
+  .lg-btn:disabled
+  {
+    opacity:.6;
+    cursor:wait;
+    transform:none
+  }
+  .lg-err
+  {
+    min-height:1.4em;
+    margin-top:14px;
+    font:600 14.5px "Jost",system-ui,sans-serif;
+    color:#b3261e
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)))
+  {
+    .lg-panel
+    {
+       background:rgba(240,250,255,.82)
+    }
+  }
+  @media(prefers-reduced-motion:reduce)
+  {
+    .lg-fx i
+    {
+      animation:none
+    }
+  }
+/* điện thoại / màn hình hẹp: tấm kính thành thẻ giữa màn hình */
+  @media(max-width:860px)
+  {
+    .lg
+    {
+      overflow:auto;
+      display:flex;
+      padding:16px
+    }
+    .lg-panel
+    {
+      position:relative;
+      top:auto;
+      right:auto;
+      bottom:auto;
+      width:min(100%,460px);
+      min-width:0;
+      margin:auto;
+      padding:30px 24px;
+      border-radius:44px;
+      overflow:hidden;
+      clip-path:none;
+      -webkit-clip-path:none;
+      border:1px solid rgba(255,255,255,.7);
+      box-shadow:0 24px 60px rgba(15,59,63,.3),inset 0 1.5px 1px rgba(255,255,255,.9)
+    }
+    .lg-edge
+    {
+      display:none
+    }
+    .lg-logo
+    {
+      width:104px;
+      height:104px
+    }
+  }
+</style>
+</head>
+<body>
+<!-- ĐỔI VIDEO NỀN: thay file login-bg.mp4 (cùng thư mục dat_phong) hoặc sửa đường dẫn src bên dưới -->
+<div id="login" class="lg">
+  <video class="lg-vid" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="video_trang_quan_tri.mp4" type="video/mp4">
+  </video>
+  <div class="lg-fx" aria-hidden="true"><i></i><i></i><i></i></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="lgWave" clipPathUnits="objectBoundingBox">
+        <path d="M0.15,0 C0.11,0.06 0.03,0.10 0.06,0.17 C0.09,0.23 0.01,0.28 0.04,0.35 C0.07,0.42 0.16,0.40 0.13,0.48 C0.10,0.56 0.02,0.58 0.05,0.66 C0.08,0.74 0.14,0.74 0.11,0.82 C0.08,0.90 0.02,0.92 0.06,0.97 C0.07,0.99 0.08,1 0.09,1 L1,1 L1,0 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+  <form id="lgform" class="lg-panel">
+    <svg class="lg-edge" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0.15,0 C0.11,0.06 0.03,0.10 0.06,0.17 C0.09,0.23 0.01,0.28 0.04,0.35 C0.07,0.42 0.16,0.40 0.13,0.48 C0.10,0.56 0.02,0.58 0.05,0.66 C0.08,0.74 0.14,0.74 0.11,0.82 C0.08,0.90 0.02,0.92 0.06,0.97 C0.07,0.99 0.08,1 0.09,1" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="9" vector-effect="non-scaling-stroke"/>
+      <path d="M0.15,0 C0.11,0.06 0.03,0.10 0.06,0.17 C0.09,0.23 0.01,0.28 0.04,0.35 C0.07,0.42 0.16,0.40 0.13,0.48 C0.10,0.56 0.02,0.58 0.05,0.66 C0.08,0.74 0.14,0.74 0.11,0.82 C0.08,0.90 0.02,0.92 0.06,0.97 C0.07,0.99 0.08,1 0.09,1" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="lg-col">
+      <div class="lg-logo"><img src="logoduan.png" alt="3Hills" onerror="this.style.display='none'"></div>
+      <h1 class="lg-title">Trang quản trị</h1>
+      <p class="lg-sub">ĐĂNG NHẬP</p>
+      <label class="lg-l" for="user">Tên đăng nhập:</label>
+      <input class="lg-in" id="user" name="username" type="text" placeholder="Tên đăng nhập" required autocomplete="username" autocapitalize="none" spellcheck="false">
+      <label class="lg-l" for="pw">Nhập mật khẩu:</label>
+      <input class="lg-in" id="pw" name="password" type="password" placeholder="Mật khẩu" required autocomplete="current-password">
+      <button class="lg-btn" id="lgbtn">Đăng nhập</button>
+      <div class="lg-err" id="lerr" role="alert"></div>
+    </div>
+  </form>
+</div>
+<div id="app" class="hide">
+<header>
+    <h1>Danh sách đặt phòng</h1>
+    <span id="who"></span>
+    <a class="sec hide" id="secLink" href="bao_mat.html">🔒 Bảo mật</a>
+    <span>Chờ xác nhận: <b id="pc">0</b></span>
+    <button class="g" id="out">Đăng xuất</button>
+</header>
+<main>
+    <div id="banner" class="hide" role="alert"></div>
+    <div class="bar">
+      <input id="q" placeholder="Tìm tên, SĐT, mã đơn, phòng…" size="32">
+      <select id="sf">
+        <option value="">Tất cả trạng thái</option>
+      </select>
+      <button class="g" id="rf">↻ Tải lại</button>
+      <button class="g" id="ex">⬇ Xuất CSV</button>
+      <span class="mut" id="cnt"></span>
+    </div>
+<div class="w">
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Thời gian</th>
+          <th>Mã đơn</th>
+          <th>Khách hàng</th>
+          <th>Phòng / Ngày</th>
+          <th>Cần thanh toán</th>
+          <th>Trạng thái</th>
+          <th></th>
+        </tr>
+      </thead>
+    <tbody id="tb"></tbody>
+    </table>
+</div>
+</main>
+</div>
+<script>
+const $=s=>document.querySelector(s),LB={Pending:'Chờ xác nhận',Confirmed:'Đã nhận tiền',CheckedIn:'Đã nhận phòng',Completed:'Hoàn tất',Cancelled:'Đã hủy'};
+const PL={deposit:'Đặt cọc 30%',prepaid:'Trả trước 100%',postpaid:'Trả sau'},MT={bank:'Ngân hàng',momo:'MoMo',alipay:'Alipay/WeChat',cash:'Tiền mặt',card:'Thẻ'};
+const h=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,y]of Object.entries(a)){if(x==='class')e.className=y;else if(x.startsWith('on'))e[x]=y;else e.setAttribute(x,y)}e.append(...k.flat());return e};
+const money=(n,c)=>c==='CNY'?'¥'+n.toLocaleString('zh-CN',{minimumFractionDigits:2}):Math.round(n).toLocaleString('vi-VN')+'đ';
+let data=[],timer,me={role:'phu',user:'',perms:{export:false,delete:false,status:{from:[],to:[]}}};
+Object.entries(LB).forEach(([k,v])=>$('#sf').append(h('option',{value:k},v)));
+async function api(p,o={}){const r=await fetch('/api/admin/'+p,{credentials:'same-origin',...o,headers:{'x-admin':'1','content-type':'application/json'}});if(r.status===401){lock();throw 0}return r}
+function lock(){clearInterval(timer);$('#app').classList.add('hide');$('#login').classList.remove('hide')}
+async function load(){
+  const r=await api('bookings');const j=await r.json().catch(()=>({}));
+  $('#login').classList.add('hide');$('#app').classList.remove('hide');
+  if(!r.ok||!Array.isArray(j.rows)){data=[];$('#banner').textContent='Không tải được danh sách đơn ('+(j.error||('lỗi '+r.status))+'). Hãy xem cửa sổ terminal đang chạy netlify dev để biết nguyên nhân.';$('#banner').classList.remove('hide');draw();return}
+  $('#banner').classList.add('hide');data=j.rows;me=j.me||me;draw()}
+function draw(){
+  $('#who').textContent=me.user?('👤 '+me.user+' · '+(me.role==='chinh'?'Admin chính':'Admin phụ')):'';$('#ex').classList.toggle('hide',!me.perms.export);$('#secLink').classList.toggle('hide',me.role!=='chinh');
+  const q=$('#q').value.toLowerCase(),sf=$('#sf').value,pend=data.filter(r=>r.status==='Pending').length;$('#pc').textContent=pend;document.title=(pend?'('+pend+') ':'')+'3Hills – Đặt phòng';
+  const list=data.filter(r=>(!sf||r.status===sf)&&(!q||[r.name,r.phone,r.code,r.room].join(' ').toLowerCase().includes(q)));$('#cnt').textContent=list.length+' đơn';
+  const tb=$('#tb');tb.replaceChildren();
+  if(!list.length)tb.append(h('tr',{},h('td',{colspan:8,class:'mut',style:'text-align:center;padding:26px'},data.length?'Không có đơn nào khớp bộ lọc.':'Chưa có đơn nào. Đơn xuất hiện sau khi khách bấm “Tôi đã thanh toán” ở trang quét mã.')));
+  list.forEach(r=>{
+    const sel=h('select',{onchange:async()=>{await api('bookings/'+r.id,{method:'PATCH',body:JSON.stringify({status:sel.value})});load()}},...Object.entries(LB).map(([k,v])=>{const o=h('option',{value:k},v);if(k===r.status)o.selected=true;const rl=me.perms.status;if(rl&&k!==r.status&&!rl.to.includes(k))o.disabled=true;return o}));
+    {const rl=me.perms.status;if(rl&&!rl.from.includes(r.status))sel.disabled=true}
+    const det=h('tr',{class:'det hide'},h('td',{colspan:8},h('dl',{},...[['Số điện thoại',r.phone],['WeChat / Email',r.contact||'—'],['Số khách',r.guests],['Số đêm',r.nights],['Dịch vụ thêm',r.services||'Không'],['Chính sách',PL[r.policy]],['Phương thức',MT[r.method]],['Mã giảm giá',r.coupon?r.coupon+' (-'+money(r.discount,r.currency)+')':'Không'],['Tổng đơn',money(r.total,r.currency)],['Hóa đơn điện tử',r.invoice?r.invoice.co+' – MST '+r.invoice.tax+(r.invoice.mail?' – '+r.invoice.mail:''):'Không'],['Ngôn ngữ',r.lang==='zh'?'中文':'Tiếng Việt']].flatMap(([a,b])=>[h('dt',{},a),h('dd',{},String(b??'—'))]))));
+    tb.append(h('tr',{class:r.status==='Pending'?'p':''},h('td',{},'#'+String(r.id).padStart(4,'0')),h('td',{},new Date(r.created_at).toLocaleString('vi-VN')),h('td',{},r.code),
+      h('td',{},h('b',{},r.name),h('div',{class:'mut'},r.phone)),h('td',{},r.room,h('div',{class:'mut'},r.check_in+' → '+r.check_out)),h('td',{},h('b',{},money(r.due,r.currency))),h('td',{},sel),
+      h('td',{},h('button',{class:'g',onclick:()=>det.classList.toggle('hide')},'Chi tiết'),' ',(me.perms.delete?h('button',{class:'d',onclick:async()=>{if(confirm('Xóa vĩnh viễn đơn '+r.code+'?')){await api('bookings/'+r.id,{method:'DELETE'});load()}}},'Xóa'):''))),det)});
+}
+$('#lgform').onsubmit=async e=>{e.preventDefault();$('#lerr').textContent='';const b=$('#lgbtn');b.disabled=true;
+  try{
+    const r=await fetch('/api/admin/login',{method:'POST',credentials:'same-origin',headers:{'x-admin':'1','content-type':'application/json'},body:JSON.stringify({username:$('#user').value.trim(),password:$('#pw').value})});
+    if(!r.ok){$('#lerr').textContent=(await r.json().catch(()=>({}))).error||'Lỗi';return}
+    $('#pw').value='';await load();timer=setInterval(()=>load().catch(()=>{}),20000)
+  }catch(x){$('#lerr').textContent='Không kết nối được máy chủ, vui lòng thử lại'}
+  finally{b.disabled=false}};
+{const v=document.querySelector('.lg-vid');if(v&&matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause()}}
+$('#out').onclick=async()=>{await api('logout',{method:'POST'}).catch(()=>{});lock()};
+$('#rf').onclick=load;$('#q').oninput=draw;$('#sf').onchange=draw;$('#ex').onclick=()=>{location.href='/api/admin/export'};
+load().then(()=>{timer=setInterval(()=>load().catch(()=>{}),20000)}).catch(()=>{});
+</script></body></html>

@@ -1,0 +1,516 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>3Hills Homestay HaLong | Đặt phòng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dat_phong.css">
+    <link rel="stylesheet" href="trangchu.css">
+    <link rel="icon" type="image/x-icon" href="logoduan.png">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="mobile.js"></script>
+    <style>
+/* ===== STEPPER (liquid glass, nằm trên form) ===== */
+.bk-wrap {
+    flex-direction: column
+}
+
+@media (prefers-color-scheme:dark) {
+    .bk-steps {
+        --ink: #fff1e6;
+        --muted: #f0c9ad;
+        --accent: #ff9a55;
+        --glass-strong: rgba(70,30,10,.28);
+        --edge: rgba(255,255,255,.28);
+        --field: rgba(255,255,255,.07)
+    }
+}
+
+.bk-steps {
+    --ink: #3b1d0b;
+    --muted: #7a5440;
+    --accent: #a94a0a;
+    --glass-strong: rgba(255,255,255,.2);
+    --edge: rgba(255,255,255,.7);
+    --field: rgba(255,255,255,.18);
+    position: relative;
+    z-index: 1;
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    max-width: 100%;
+    border-radius: 999px;
+    background: var(--glass-strong);
+    border: 1px solid var(--edge);
+    backdrop-filter: blur(12px) saturate(170%);
+    -webkit-backdrop-filter: blur(12px) saturate(170%);
+    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -1px 1px rgba(255,255,255,.2), 0 8px 22px rgba(90,35,5,.16)
+}
+
+.bk-steps .bk-step {
+    display: flex;
+    flex: none
+}
+
+.bk-steps .bk-dot {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: Jost, system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--field);
+    border: 1px solid var(--edge);
+    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.65), inset 0 -2px 4px rgba(255,255,255,.12), 0 4px 10px rgba(90,35,5,.12);
+    transition: background .4s, color .4s, transform .4s, box-shadow .4s, border-color .4s
+}
+
+    .bk-steps .bk-dot::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: linear-gradient(135deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 55%)
+    }
+
+    .bk-steps .bk-dot b {
+        position: relative;
+        font-weight: inherit;
+        line-height: 1
+    }
+
+.bk-steps .bk-step.is-active .bk-dot, .bk-steps .bk-step.is-done .bk-dot {
+    color: var(--ink);
+    font-weight: 700;
+    background: color-mix(in srgb, var(--accent) 34%, var(--glass-strong));
+    border-color: var(--accent);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,.8), inset 0 -3px 6px color-mix(in srgb, var(--accent) 30%, transparent), 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent), 0 8px 20px color-mix(in srgb, var(--accent) 40%, transparent)
+}
+
+.bk-steps .bk-step.is-active .bk-dot {
+    transform: scale(1.05)
+}
+
+.bk-steps .bk-step.is-done .bk-dot {
+    box-shadow: inset 0 2px 2px rgba(255,255,255,.8), inset 0 -3px 6px color-mix(in srgb, var(--accent) 30%, transparent), 0 6px 14px color-mix(in srgb, var(--accent) 30%, transparent)
+}
+
+.bk-steps .bk-line {
+    flex: none;
+    width: 84px;
+    height: 6px;
+    margin: 0 4px;
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+    background: var(--field);
+    border: 1px solid var(--edge);
+    box-shadow: inset 0 1px 2px rgba(90,35,5,.18)
+}
+
+    .bk-steps .bk-line i {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        transform: scaleX(0);
+        transform-origin: left;
+        background: linear-gradient(90deg, var(--accent), rgba(255,255,255,.85));
+        box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 70%, transparent);
+        transition: transform .6s cubic-bezier(.4,0,.2,1)
+    }
+
+    .bk-steps .bk-line.is-full i {
+        transform: scaleX(1)
+    }
+
+@media (max-width:520px) {
+    .bk-steps .bk-dot {
+        width: 40px;
+        height: 40px;
+        font-size: 18px
+    }
+
+    .bk-steps .bk-line {
+        width: 60px
+    }
+}
+/* ===== Chọn số đêm (− / +) ===== */
+.nt {
+    --nt-ink: #3b1d0b;
+    --nt-muted: #7a5440;
+    --nt-accent: #a94a0a;
+    --nt-field: rgba(255,255,255,.18);
+    --nt-edge: rgba(255,255,255,.7);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: max-content;
+    max-width: 100%;
+    padding: 6px;
+    border-radius: 999px;
+    background: var(--nt-field);
+    border: 1px solid var(--nt-edge);
+    backdrop-filter: blur(12px) saturate(170%);
+    -webkit-backdrop-filter: blur(12px) saturate(170%);
+    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.6), 0 6px 16px rgba(90,35,5,.12)
+}
+
+@media (prefers-color-scheme:dark) {
+    .nt {
+        --nt-ink: #fff1e6;
+        --nt-muted: #f0c9ad;
+        --nt-accent: #ff9a55;
+        --nt-field: rgba(255,255,255,.07);
+        --nt-edge: rgba(255,255,255,.28)
+    }
+}
+
+.nt button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--nt-edge);
+    background: color-mix(in srgb, var(--nt-accent) 28%, var(--nt-field));
+    color: var(--nt-ink);
+    font: 600 22px/1 Jost, system-ui, sans-serif;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    transition: transform .2s, background .2s, opacity .2s
+}
+
+    .nt button:hover:not(:disabled) {
+        transform: scale(1.08);
+        background: color-mix(in srgb, var(--nt-accent) 45%, var(--nt-field))
+    }
+
+    .nt button:active:not(:disabled) {
+        transform: scale(.94)
+    }
+
+    .nt button:disabled {
+        opacity: .35;
+        cursor: not-allowed
+    }
+
+.nt input {
+    width: 52px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    text-align: center;
+    color: var(--nt-ink);
+    font: 600 22px/1 Jost, system-ui, sans-serif;
+    box-shadow: none;
+    -moz-appearance: textfield;
+    appearance: textfield
+}
+
+    .nt input::-webkit-outer-spin-button, .nt input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0
+    }
+
+.nt .nt-u {
+    color: var(--nt-muted);
+    font: 500 16px Jost, system-ui, sans-serif;
+    margin-left: -4px
+}
+
+.nt-hint {
+    grid-column: span 2;
+    align-self: center;
+    font-size: 14px;
+    opacity: .75
+}
+
+@media (max-width:640px) {
+    .nt-hint {
+        grid-column: auto
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="hd" id="hd" role="banner">
+        <a href="../trang_chu/home.html" class="hd-brand">
+            <img src="logoduan.png" alt="3HILLS" style="width: 50px; height: 50px; object-fit: cover; border-radius: 18px; box-shadow: 0 6px 16px rgba(0,0,0,0.15); flex-shrink: 0;">
+            YOUR BRAND<br />NAME
+        </a>
+
+        <nav class="hd-nav hd-glass" id="hd-nav" aria-label="Menu chính">
+            <span class="hd-pill" id="hd-pill"></span>
+            <a href="../trang_chu/home.html">Câu chuyện</a>
+            <a href="../hang_phong/hangphong.html">Hạng phòng</a>
+        </nav>
+
+        <div class="hd-actions">
+            <div class="hd-lang hd-glass">
+                <a href="dat_phong.html" aria-current="true">Tiếng Việt</a>
+                <a href="预订房间.html">中文</a>
+            </div>
+        </div>
+    </div>
+    <section class="hc">
+        <div class="hc-bg"></div>
+        <div class="hc-blob a"><i></i></div><div class="hc-blob b"><i></i></div><div class="hc-blob c"><i></i></div>
+        <h2 class="hc-sr">YOUR BRAND NAME | Đặt Phòng</h2>
+        <div class="hc-stage" aria-hidden="true">
+            <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+            <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+            <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+            <div class="hc-row hc-ltr"><div class="hc-track"></div></div>
+            <div class="hc-row hc-rtl"><div class="hc-track"></div></div>
+        </div>
+
+        <div class="bk-wrap">
+            <main class="bk">
+                <header>
+                    <div><h1>Đặt Phòng Trực Tuyến</h1><p>Hệ thống xác nhận tự động, giữ phòng ngay chỉ trong 1 phút.</p></div>
+                    <div class="note bk-glass">ⓘ Hỗ trợ đặt cọc linh hoạt qua Ngân hàng VN hoặc WeChat / Alipay cho khách quốc tế</div>
+                </header>
+
+
+                <div class="grid g3">
+                    <div>
+                        <label class="l" for="bk-room">Hạng phòng</label>
+                        <select id="bk-room">
+                            <option value="400000">GROVE by MAY5 - 400.000đ/đêm</option>
+                            <option value="1150000" selected>Bay View Suite - 1.150.000đ/đêm</option>
+                            <option value="1850000">Heritage Family Villa - 1.850.000đ/đêm</option>
+                            <option value="750000">Hillside Deluxe - 750.000đ/đêm</option>
+                        </select>
+                    </div>
+                    <div><label class="l" for="bk-cin">Ngày nhận phòng (Check-in)</label><input type="date" id="bk-cin"></div>
+                    <div><label class="l" for="bk-cout">Ngày trả phòng (Check-out)</label><input type="date" id="bk-cout"><div class="err" id="bk-err"></div></div>
+                </div>
+
+                <div class="grid g3" style="margin-top:6px">
+                    <div>
+                        <label class="l" for="bk-n-input">Số đêm nghỉ (tự chọn)</label>
+                        <div class="nt" role="group" aria-label="Chọn số đêm nghỉ">
+                            <button type="button" id="bk-n-minus" aria-label="Giảm một đêm">−</button>
+                            <input id="bk-n-input" type="number" min="1" max="30" value="1" inputmode="numeric">
+                            <span class="nt-u">đêm</span>
+                            <button type="button" id="bk-n-plus" aria-label="Tăng một đêm">+</button>
+                        </div>
+                    </div>
+                    <div class="nt-hint">Chọn số đêm, ngày trả phòng sẽ tự cập nhật (tối đa 30 đêm); hoặc chọn trực tiếp ngày trả phòng.</div>
+                </div>
+
+                <div class="grid g4" style="margin-top:6px">
+                    <div><label class="l" for="bk-name">Họ và tên khách</label><input id="bk-name" placeholder="Nguyễn Văn A / 张伟"></div>
+                    <div><label class="l" for="bk-phone">Số điện thoại / Zalo</label><input id="bk-phone" placeholder="0987 654 321" inputmode="tel"></div>
+                    <div><label class="l" for="bk-wc">ID WeChat / Email (nếu có)</label><input id="bk-wc" placeholder="wechat_id hoặc email"></div>
+                    <div>
+                        <label class="l" for="bk-guests">Số lượng khách</label>
+                        <select id="bk-guests"><option>1 người</option><option>2 người lớn</option><option>3 người</option><option selected>4 người</option><option>Trên 5 người (Nhóm / Gia đình)</option></select>
+                    </div>
+                </div>
+
+                <div class="l" style="margin-top:24px">Yêu cầu đặc biệt &amp; dịch vụ đi kèm</div>
+                <div class="opts">
+                    <label class="opt"><input type="checkbox" class="svc" data-price="150000" data-per="night">Thuê xe máy (150k/ngày)</label>
+                    <label class="opt"><input type="checkbox" class="svc" data-price="120000" data-per="once">Set trà chiều hoàng hôn (120k)</label>
+                    <label class="opt"><input type="checkbox" class="svc" data-price="500000" data-per="once">Gói quay video Xiaohongshu</label>
+                    <label class="opt"><input type="checkbox" class="svc" data-price="300000" data-per="once">Bếp nướng BBQ ngoài trời</label>
+                </div>
+                <textarea placeholder="Ghi chú thời gian check-in dự kiến, đón trả tại bến xe hoặc yêu cầu khác..."></textarea>
+
+                <section class="sum bk-glass">
+                    <div>
+                        <h3>Tóm tắt chi phí dự kiến</h3>
+                        <div class="meta">
+                            <span>Số đêm nghỉ: <b id="bk-nights">1 đêm</b></span>•
+                            <span>Giá phòng/đêm: <b id="bk-rate">0đ</b></span>•
+                            <span>Dịch vụ thêm: <b id="bk-svc">0đ</b></span>
+                        </div>
+                    </div>
+                    <div class="cta">
+                        <div class="total"><small>Tổng thanh toán trực tuyến:</small><span class="amt" id="bk-total">0đ</span></div>
+                        <button id="bk-send" type="button">Tiếp</button>
+                    </div>
+                </section>
+            </main>
+                <ol class="bk-steps" id="bk-steps" aria-label="Tiến trình đặt phòng">
+      <li class="bk-step is-active" aria-current="step" data-step="1"><span class="bk-dot"><b>1</b></span></li>
+      <li class="bk-line" aria-hidden="true"><i></i></li>
+      <li class="bk-step" data-step="2"><span class="bk-dot"><b>2</b></span></li>
+      <li class="bk-line" aria-hidden="true"><i></i></li>
+      <li class="bk-step" data-step="3"><span class="bk-dot"><b>3</b></span></li>
+    </ol>
+        </div>
+    </section>
+
+    <script>
+/* ===== Hero: chữ kính chạy ngang (giữ nguyên logic gốc) ===== */
+(function(){
+          var TEXT='YOUR BRAND NAME';
+          var SPEED=[64,52,78,58,70];
+          var OFF=[0,.3,.55,.8,.15];
+          function item(){var s=document.createElement('span');s.className='hc-item';s.innerHTML='<span class="hc-t"></span><i class="hc-dot"></i>';s.firstChild.textContent=TEXT;return s;}
+          [].slice.call(document.querySelectorAll('.hc')).forEach(function(el){
+            var rows=[].slice.call(el.querySelectorAll('.hc-row'));
+            function build(){
+              rows.forEach(function(row,i){
+                var track=row.querySelector('.hc-track');track.innerHTML='';
+                var g=document.createElement('div');g.className='hc-group';g.appendChild(item());track.appendChild(g);
+                var w=g.getBoundingClientRect().width||1;
+                var n=Math.max(1,Math.ceil(el.clientWidth/w));
+                for(var k=1;k<n;k++) g.appendChild(item());
+                var gw=g.getBoundingClientRect().width;
+                var clone=g.cloneNode(true);clone.setAttribute('aria-hidden','true');track.appendChild(clone);
+                var dur=gw/SPEED[i];
+                track.style.animationDuration=dur+'s';track.style.animationDelay=(-dur*OFF[i])+'s';
+              });
+            }
+            var timer;
+            window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(build,200)});
+            build();
+            if(document.fonts&&document.fonts.ready) document.fonts.ready.then(build);
+            el.addEventListener('pointermove',function(e){
+              var r=el.getBoundingClientRect();
+              el.style.setProperty('--hc-mx',((e.clientX-r.left)/r.width-.5).toFixed(3));
+              el.style.setProperty('--hc-my',((e.clientY-r.top)/r.height-.5).toFixed(3));
+            },{passive:true});
+          });
+})();
+
+/* ===== Form: tổng tiền tự tính ===== */
+(function(){
+          var $=function(id){return document.getElementById(id)};
+          var fmt=function(n){return Math.round(n).toLocaleString('vi-VN')+'đ'};
+          var room=$('bk-room'),cin=$('bk-cin'),cout=$('bk-cout');
+          var svcs=[].slice.call(document.querySelectorAll('.bk .svc'));
+          var nIn=$('bk-n-input'),nMinus=$('bk-n-minus'),nPlus=$('bk-n-plus'),MAXN=30;
+          var dayNum=function(s){var p=s.split('-');return Date.UTC(+p[0],+p[1]-1,+p[2])/864e5};
+          var addDays=function(s,k){var p=s.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]+k)).toISOString().slice(0,10)};
+          var getN=function(){return Math.min(MAXN,Math.max(1,parseInt(nIn.value)||1))};
+          var iso=function(d){return new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+          cin.min=iso(new Date());
+
+          var shown=0,raf;
+          function animateTo(target){
+            cancelAnimationFrame(raf);
+            var from=shown,t0=performance.now(),dur=550,el=$('bk-total');
+            el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
+            (function step(t){
+              var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+              shown=from+(target-from)*e;el.textContent=fmt(shown);
+              if(p<1) raf=requestAnimationFrame(step);
+            })(t0);
+          }
+          function setText(id,v){var el=$(id);if(el.textContent===v)return;el.textContent=v;el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');}
+
+          function calc(){
+            var err='',n;
+            if(cin.value) cout.min=addDays(cin.value,1);
+            if(cin.value&&cout.value){
+              n=dayNum(cout.value)-dayNum(cin.value);
+              if(n<1){err='Ngày trả phải sau ngày nhận phòng';n=getN();}
+              else if(n>MAXN){err='Tối đa '+MAXN+' đêm';n=MAXN;cout.value=addDays(cin.value,n);}
+            } else n=getN();
+            $('bk-err').textContent=err;
+            nIn.value=n;nMinus.disabled=n<=1;nPlus.disabled=n>=MAXN;
+            var rate=+room.value;
+            var svc=svcs.reduce(function(s,c){return c.checked?s+(+c.dataset.price)*(c.dataset.per==='night'?n:1):s},0);
+            var total=rate*n+svc;
+            setText('bk-nights',n+' đêm');setText('bk-rate',fmt(rate));setText('bk-svc',fmt(svc));
+            if(Math.round(total)!==Math.round(shown)||!$('bk-total').textContent) animateTo(total);
+          }
+          [room,cout].concat(svcs).forEach(function(e){e.addEventListener('change',calc)});
+          cin.addEventListener('change',function(){if(cin.value) cout.value=addDays(cin.value,getN());calc();});
+
+          /* ===== Chọn số đêm: đồng bộ với ngày trả phòng ===== */
+          function setN(v){
+            nIn.value=Math.min(MAXN,Math.max(1,v));
+            if(cin.value) cout.value=addDays(cin.value,getN());
+            calc();
+          }
+          nMinus.addEventListener('click',function(){setN(getN()-1)});
+          nPlus.addEventListener('click',function(){setN(getN()+1)});
+          nIn.addEventListener('input',function(){if(nIn.value!=='') setN(parseInt(nIn.value)||1)});
+          nIn.addEventListener('blur',function(){setN(getN())});
+
+          /* ===== Stepper ===== */
+          var stepEls=[].slice.call(document.querySelectorAll('#bk-steps .bk-step')),stepLines=[].slice.call(document.querySelectorAll('#bk-steps .bk-line'));
+          function setStep(n){
+            stepEls.forEach(function(li,i){
+              var k=i+1,dot=li.querySelector('b');
+              li.classList.toggle('is-active',k===n);li.classList.toggle('is-done',k<n);
+              dot.textContent=k<n?'\u2713':k;
+              if(k===n) li.setAttribute('aria-current','step'); else li.removeAttribute('aria-current');
+            });
+            stepLines.forEach(function(l,i){l.classList.toggle('is-full',n>i+1)});
+          }
+          document.querySelector('.bk').addEventListener('input',function(){setStep(1)});
+
+          $('bk-send').addEventListener('click',function(){
+            var b=this,ok=$('bk-name').value.trim()&&$('bk-phone').value.trim();
+            if(!ok){
+              b.textContent='Vui lòng nhập tên & SĐT';setStep(1);
+              setTimeout(function(){b.textContent='Tiếp'},2200);
+              return;
+            }
+            setStep(2);
+            var data={
+              room:$('bk-room').selectedOptions[0].text.split(' - ')[0],
+              cin:$('bk-cin').value||'—',cout:$('bk-cout').value||'—',
+              nights:parseInt($('bk-nights').textContent)||1,
+              rate:+$('bk-room').value,
+              svc:parseInt($('bk-svc').textContent.replace(/\D/g,''))||0,
+              guests:$('bk-guests').value,name:$('bk-name').value,phone:$('bk-phone').value,contact:$('bk-wc').value,
+              services:[].slice.call(document.querySelectorAll('.bk .svc:checked')).map(function(c){return c.parentNode.textContent.trim()})
+            };
+            data.total=data.rate*data.nights+data.svc;
+            try{sessionStorage.setItem('booking',JSON.stringify(data))}catch(e){}
+            /* gửi kèm trên URL để vẫn đúng số khi hai trang khác cổng/domain */
+            location.href='thanh_toan.html?d='+encodeURIComponent(JSON.stringify(data));
+          });
+          calc();
+})();
+
+/* ===== Header: viên kính trượt + thu gọn khi cuộn ===== */
+(function(){
+          var nav=document.getElementById('hd-nav'),pill=document.getElementById('hd-pill'),hd=document.getElementById('hd');
+          var links=[].slice.call(nav.querySelectorAll('a'));
+          var current=nav.querySelector('a[aria-current="page"]');
+          function move(el){pill.style.width=el.offsetWidth+'px';pill.style.transform='translateX('+(el.offsetLeft-6)+'px)';pill.classList.add('on');}
+          function rest(){if(current)move(current);else pill.classList.remove('on');}
+          links.forEach(function(a){
+            a.addEventListener('mouseenter',function(){move(a)});
+            a.addEventListener('focus',function(){move(a)});
+          });
+          nav.addEventListener('mouseleave',rest);
+          nav.addEventListener('focusout',rest);
+          window.addEventListener('resize',rest);
+          if(document.fonts&&document.fonts.ready) document.fonts.ready.then(rest);
+          rest();
+          window.addEventListener('scroll',function(){hd.classList.toggle('is-scrolled',window.scrollY>30)},{passive:true});
+})();
+    </script>
+<script>
+/* Nhận phòng + ngày từ pop-up kiểm tra phòng ở trang chủ (?room=&in=&out=) */
+(function(){var p=new URLSearchParams(location.search),r=p.get('room'),i=p.get('in'),o=p.get('out'),D=/^\d{4}-\d{2}-\d{2}$/;
+  if(!r&&!i)return;var $=function(x){return document.getElementById(x)},fire=function(e){e.dispatchEvent(new Event('change',{bubbles:true}))};
+  if(r){var sel=$('bk-room');[].some.call(sel.options,function(op,k){if(op.text.split(' - ')[0]===r){sel.selectedIndex=k;fire(sel);return true}})}
+  if(D.test(i||'')){var a=$('bk-cin');a.value=i;fire(a);if(D.test(o||'')){var b=$('bk-cout');b.value=o;fire(b)}}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+/* ===== HEADER LIQUID GLASS – mọi class đều có tiền tố hd- ===== */
+.hd {
+    --hd-glass: rgba(255,255,255,.14);
+    --hd-glass-strong: rgba(255,255,255,.3);
+    --hd-edge: rgba(255,255,255,.6);
+    --hd-text: #3b1d0b;
+    --hd-gold: #8a5410;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: max(16px, env(safe-area-inset-top)) 28px 16px;
+    font-family: "Jost","Be Vietnam Pro",system-ui,sans-serif;
+    transition: padding .3s ease;
+}
+.hd *, .hd *::before, .hd *::after { box-sizing: border-box; }
+.hd.is-scrolled { padding-top: 10px; padding-bottom: 10px; }
+
+.hd-brand {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none; white-space: nowrap;
+    font-family: "Playfair Display",Georgia,serif;
+    font-weight: 700; font-size: 1.5rem; letter-spacing: .02em;
+    color: var(--hd-gold);
+    text-shadow: 0 1px 8px rgba(255,255,255,.35);
+}
+.hd-logo {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: #0f3b3f; color: #fff;
+    display: grid; place-items: center;
+    font: 600 .6rem "Jost",sans-serif; letter-spacing: .05em;
+    box-shadow: 0 4px 14px rgba(0,0,0,.25);
+}
+.hd-logo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+/* ----- Kính dùng chung cho nav, ngôn ngữ, nút đặt phòng ----- */
+.hd-glass {
+    position: relative;
+    height: 58px;
+    background: var(--hd-glass);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--hd-edge);
+    border-radius: 999px;
+    box-shadow:
+        0 8px 32px rgba(90,35,5,.18),
+        inset 0 1px 1px rgba(255,255,255,.8),
+        inset 0 -1px 2px rgba(255,255,255,.25),
+        inset 0 0 22px rgba(255,255,255,.12);
+    isolation: isolate;
+    overflow: hidden;
+}
+.hd-glass::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    background: linear-gradient(115deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 35%,rgba(255,255,255,0) 65%,rgba(255,255,255,.25) 100%);
+    opacity: .7; pointer-events: none;
+}
+.hd-glass::after {
+    content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; z-index: -1;
+    background: linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform: skewX(-20deg); transition: left .9s ease; pointer-events: none;
+}
+.hd-glass:hover::after { left: 130%; }
+
+/* ----- Nav ----- */
+.hd-nav { display: flex; align-items: center; gap: 4px; padding: 6px; }
+.hd-nav a, .hd-lang a {
+    position: relative; z-index: 1;
+    display: flex; align-items: center;
+    padding: 0 22px; height: 100%;
+    border-radius: 999px;
+    font-size: .95rem; font-weight: 600;
+    color: var(--hd-text); text-decoration: none;
+    transition: color .25s, background .25s;
+}
+.hd-nav a:hover { color: #000; }
+.hd-nav a:focus-visible, .hd-lang a:focus-visible, .hd-cta:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.hd-pill {
+    position: absolute; z-index: 0; top: 6px; left: 6px;
+    height: calc(100% - 12px); width: 0; opacity: 0;
+    border-radius: 999px;
+    background: var(--hd-glass-strong);
+    border: 1px solid rgba(255,255,255,.7);
+    box-shadow: 0 4px 14px rgba(0,0,0,.08), inset 0 1px 2px rgba(255,255,255,.9);
+    transition: transform .45s cubic-bezier(.34,1.56,.64,1), width .45s cubic-bezier(.34,1.56,.64,1), opacity .25s;
+    pointer-events: none;
+}
+.hd-pill.on { opacity: 1; }
+
+/* ----- Ngôn ngữ + nút đặt phòng ----- */
+.hd-actions { display: flex; align-items: center; gap: 14px; }
+.hd-lang { display: flex; align-items: center; gap: 2px; padding: 6px; }
+.hd-lang a { padding: 0 16px; }
+.hd-lang a[aria-current="true"], .hd-lang a:hover { background: var(--hd-glass-strong); }
+
+.hd-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 0 28px;
+    font: 600 .95rem "Jost","Be Vietnam Pro",sans-serif;
+    color: var(--hd-text); text-decoration: none; cursor: pointer;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), background .3s, color .25s;
+}
+.hd-cta svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.hd-cta:hover { transform: translateY(-2px); background: var(--hd-glass-strong); color: #000; }
+.hd-cta:active { transform: scale(.97); }
+
+/* ----- Chừa chỗ để form đặt phòng không bị header đè ----- */
+.bk-wrap { padding-top: calc(110px + env(safe-area-inset-top,0px)); }
+
+/* ----- Mobile ----- */
+@media (max-width: 980px) {
+    .hd { flex-wrap: wrap; justify-content: center; padding: 12px 14px; }
+    .hd-nav { order: 3; width: 100%; justify-content: space-between; overflow-x: auto; }
+    .hd-nav a { padding: 0 14px; font-size: .85rem; white-space: nowrap; }
+    .hd-brand { font-size: 1.1rem; }
+    .hd-logo { width: 40px; height: 40px; }
+    .hd-actions { gap: 8px; }
+    .hd-glass { height: 50px; }
+    .hd-cta { padding: 0 18px; }
+    .bk-wrap { padding-top: calc(190px + env(safe-area-inset-top,0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hd *, .hd *::before, .hd *::after { transition: none !important; }
+}

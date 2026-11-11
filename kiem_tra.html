@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Kiểm tra hệ thống đặt phòng</title>
+<style>
+:root{--teal:#0f3b3f;--org:#a94a0a;--bg:#f7efe8;--line:#e3d3c4;--ink:#2b1608}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:28px 20px}h1{margin:0 0 6px;color:var(--teal);font-size:24px}
+.sub{margin:0 0 18px;color:#7a5440}
+.note{background:#fff8e6;border:1px solid #f0dca0;border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:14px}
+ol{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px}
+li{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+li i{font-style:normal;font-size:20px;line-height:1.3;text-align:center}li b{display:block}li small{display:block;color:#7a5440;margin-top:2px;word-break:break-word}
+li.ok{background:#f4faf5;border-color:#cfe6d4}li.no{background:#fdf1ef;border-color:#f1c9c4}li.wait{opacity:.6}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button,a.b{font:inherit;padding:10px 16px;border-radius:10px;border:0;background:var(--org);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+button.g,a.g{background:#fff;color:var(--ink);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:wait}
+</style></head><body><main>
+<h1>Kiểm tra hệ thống đặt phòng</h1>
+<p class="sub">Trang này tự kiểm tra máy chủ, cơ sở dữ liệu và gửi thử một đơn để biết chính xác chỗ nào đang lỗi.</p>
+<div class="note">Chỉ dùng khi thử trên máy. <b>Hãy xóa file này trước khi đưa website lên Netlify thật.</b></div>
+<ol id="list"></ol>
+<div class="row"><button id="run">1. Kiểm tra máy chủ</button><button id="send" class="g" disabled>2. Gửi 1 đơn thử</button><a class="b g" href="trang_quan_tri.html">Mở trang quản trị</a></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const add=(state,title,detail)=>{const li=document.createElement('li');li.className=state;
+  const i=document.createElement('i');i.textContent={ok:'✔',no:'✖',wait:'…',warn:'⚠'}[state]||'•';
+  const d=document.createElement('div'),b=document.createElement('b'),s=document.createElement('small');b.textContent=title;s.textContent=detail||'';d.append(b,s);li.append(i,d);$('#list').append(li);return li};
+const isJson=r=>(r.headers.get('content-type')||'').includes('json');
+
+async function checkServer(){
+  $('#list').replaceChildren();$('#send').disabled=true;
+  const o=location;
+  if(o.protocol==='file:'){add('no','Đang mở trang bằng file trực tiếp','Hãy mở bằng địa chỉ http://localhost:8888/dat_phong/kiem_tra.html sau khi chạy netlify dev.');return}
+  if(['localhost','127.0.0.1'].includes(o.hostname)&&o.port!=='8888')add('warn','Bạn đang mở trang ở cổng '+(o.port||'80'),'Hãy dùng cổng 8888 (http://localhost:8888/dat_phong/kiem_tra.html). Các cổng khác không chạy được phần API.');
+  else add('ok','Địa chỉ trang hợp lệ',o.origin);
+  let r;
+  try{r=await fetch('/api/bookings/ping/status',{cache:'no-store'})}catch(e){add('no','Không kết nối được máy chủ','netlify dev có đang chạy không? Hãy xem cửa sổ terminal.');return}
+  let j=null;if(isJson(r))j=await r.json().catch(()=>null);
+  if(r.status===404&&j&&j.error==='Not found'){add('ok','API và cơ sở dữ liệu đang hoạt động','Máy chủ đã trả lời đúng và truy vấn được cơ sở dữ liệu.');$('#send').disabled=false}
+  else if(r.status===404||!j)add('no','API chưa chạy (trang chỉ là máy chủ tĩnh)','Nguyên nhân thường gặp: netlify dev đang chạy sai thư mục (dòng nhắc lệnh phải kết thúc bằng "HaLong Cross - Border Media>"), hoặc api.mjs chưa nằm đúng netlify/functions/api.mjs. Terminal không được hiện dòng "No app server detected".');
+  else if(r.status===500)add('no','API chạy nhưng bị lỗi cơ sở dữ liệu','Xem dòng chữ đỏ trong terminal. Hay gặp: PostgreSQL chưa bật, sai mật khẩu trong DATABASE_URL, hoặc DATA_KEY / SESSION_SECRET trong .env chưa đúng (sau khi sửa .env phải chạy lại netlify dev).');
+  else add('no','Phản hồi không mong đợi (HTTP '+r.status+')',JSON.stringify(j));
+}
+
+async function sendTest(){
+  const code='TEST'+Date.now().toString().slice(-8);$('#send').disabled=true;
+  const w=add('wait','Đang gửi đơn thử…','');
+  const body={room:'Phòng thử nghiệm',cin:'2026-12-01',cout:'2026-12-03',nights:2,guests:'Trên 5 người (Nhóm / Gia đình)',name:'KHÁCH THỬ',phone:'0900000000 (Zalo)',contact:'thu_wechat',
+    services:['Thuê xe máy (150k/ngày)'],total:1000000,code,method:'bank',discount:0,coupon:'',due:300000,policy:'deposit',invoice:null,lang:'vi'};
+  let r,j={};
+  try{r=await fetch('/api/bookings/paid',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(isJson(r))j=await r.json().catch(()=>({}))}
+  catch(e){w.remove();add('no','Không gửi được đơn thử','Mất kết nối tới máy chủ.');$('#send').disabled=false;return}
+  w.remove();
+  if(r.status===200){
+    const s=await fetch('/api/bookings/'+code+'/status',{cache:'no-store'}).then(x=>x.json()).catch(()=>({}));
+    if(s.status)add('ok','Đơn thử đã được lưu vào cơ sở dữ liệu','Mã đơn '+code+' · trạng thái "'+s.status+'". Giờ hãy mở trang quản trị: phải thấy khách tên "KHÁCH THỬ". Nếu có, hệ thống đã chạy đúng và các đơn thật cũng sẽ vào được.');
+    else add('no','Máy chủ báo nhận nhưng không tìm thấy đơn','Có thể API và trang quản trị đang dùng hai cơ sở dữ liệu khác nhau. Gửi mình dòng đầu tiên trong terminal.');
+  }else if(r.status===400&&j.error==='Dữ liệu không hợp lệ')add('no','api.mjs vẫn là BẢN CŨ','Bản cũ từ chối đơn có số khách "Trên 5 người (…)" hoặc số điện thoại có chữ "(Zalo)". Hãy thay bằng api.mjs mới vào netlify/functions/ rồi chạy lại netlify dev.');
+  else if(r.status===400)add('no','Đơn bị từ chối',j.error||'');
+  else if(r.status===429)add('warn','Gửi quá nhiều lần','Mỗi địa chỉ chỉ được gửi 10 đơn trong 10 phút. Hãy đợi rồi thử lại.');
+  else add('no','Gửi đơn thử thất bại (HTTP '+r.status+')',j.error||'Xem dòng chữ đỏ trong terminal.');
+  $('#send').disabled=false;
+}
+$('#run').onclick=checkServer;$('#send').onclick=sendTest;checkServer();
+</script></main></body></html>
